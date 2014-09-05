@@ -9,7 +9,7 @@ public class Prime {
         ArrayList<Integer> resultList = new ArrayList<Integer>();
 
         for (int factor = 2; number != 1; factor++) {
-            for (; number % factor == 0 ; number /= factor)
+            for (; number % factor == 0; number /= factor)
                 resultList.add(factor);
         }
 

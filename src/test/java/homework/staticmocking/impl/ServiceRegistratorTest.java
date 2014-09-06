@@ -20,6 +20,22 @@ import homework.staticmocking.osgi.ServiceRegistration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.internal.util.reflection.Whitebox;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * The purpose of this test is to get 100% coverage of the
@@ -30,8 +46,8 @@ import org.junit.Test;
  * While doing this tutorial please refer to the documentation on how to mock
  * static methods and bypass encapsulation at the PowerMock web site.
  */
-// TODO Specify the PowerMock runner
-// TODO Specify which classes that must be prepared for test
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({IdGenerator.class})
 public class ServiceRegistratorTest {
 
 	private BundleContext bundleContextMock;
@@ -40,14 +56,16 @@ public class ServiceRegistratorTest {
 
 	@Before
 	public void setUp() {
-		// TODO Create a mock object of the BundleContext and ServiceRegistration classes
-		// TODO Create a new instance of SampleServiceImpl and pass in the created mock objects to the constructor
-		// TODO Prepare the IdGenerator for static mocking
+        bundleContextMock = mock(BundleContext.class);
+		serviceRegistrationMock = mock(ServiceRegistration.class);
+		tested = new ServiceRegistrator();
+        Whitebox.setInternalState(tested, "bundleContext", bundleContextMock);
 	}
 
 	@After
 	public void tearDown() {		
-		// TODO Set all references to null
+		bundleContextMock = null;
+        serviceRegistrationMock = null;
 	}
 
 	/**
@@ -59,13 +77,18 @@ public class ServiceRegistratorTest {
 	 */
 	@Test
 	public void testRegisterService() throws Exception {
-		// TODO Set the bundle context mock to the correct field in the tested instance
-		// TODO Expect the call to bundleContextMock.registerService(..) and return a mock
-		// TODO Expect the static method call to IdGenerator.generateNewId() and return a known id
-		// TODO Replay all mock objects used and the class containing the static method
-		// TODO Perform the actual test and assert that the result matches the expectations
-		// TODO Verify all mock objects used and the class containing the static method
-		// TODO Assert that the serviceRegistrations map in the test instance has been updated correctly
+        when(bundleContextMock.registerService(anyString(), any(), anyString())).thenReturn(serviceRegistrationMock);
+        mockStatic(IdGenerator.class);
+        when(IdGenerator.generateNewId()).thenReturn(1001L);
+
+        assertThat(tested.registerService("test", new Object()), is(1001L));
+
+        verify(bundleContextMock).registerService(anyString(), any(), anyString());
+        PowerMockito.verifyStatic();
+        IdGenerator.generateNewId();
+
+        Map<Long, ServiceRegistration> serviceRegistrations = (Map<Long, ServiceRegistration>) Whitebox.getInternalState(tested, "serviceRegistrations");
+        assertThat(serviceRegistrations.get(1001L), is(serviceRegistrationMock));
 	}
 
 	/**
@@ -76,14 +99,15 @@ public class ServiceRegistratorTest {
 	 */
 	@Test
 	public void testUnregisterService() throws Exception {
-		// TODO Create a new HashMap of ServiceRegistration's and add a new ServiceRegistration to the map.
-		// TODO Set the new HashMap to the serviceRegistrations field in the tested instance 
-		// TODO Expect the call to serviceRegistrationMock.unregister()
-		// TODO Replay all mock objects used
-		// TODO Perform the actual test and assert that the result matches the expectations
-		// TODO Verify all mock objects used
-		// TODO Assert that the serviceRegistrations map in the test instance has been updated correctly
-	}
+        Map<Long, ServiceRegistration> serviceRegistrations = new HashMap<>();
+        serviceRegistrations.put(1002L, serviceRegistrationMock);
+        Whitebox.setInternalState(tested, "serviceRegistrations", serviceRegistrations);
+        doNothing().when(serviceRegistrationMock).unregister();
+
+        tested.unregisterService(1002L);
+
+        verify(serviceRegistrationMock).unregister();
+    }
 
 	/**
 	 * Test for the {@link ServiceRegistrator#unregisterService(long)} method
@@ -92,13 +116,8 @@ public class ServiceRegistratorTest {
 	 * @throws Exception
 	 *             If an error occurs.
 	 */
-	@Test
+	@Test(expected = IllegalStateException.class)
 	public void testUnregisterService_idDoesntExist() throws Exception {
-		// TODO Create a new HashMap of ServiceRegistration's and set it to the serviceRegistrations field in the tested instance 
-		// TODO Expect the call to serviceRegistrationMock.unregister() and throw an IllegalStateException
-		// TODO Replay all mock objects used
-		// TODO Perform the actual test and assert that the result matches the expectations
-		// TODO Verify all mock objects used
-		// TODO Assert that the serviceRegistrations map in the test instance has not been updated
-	}
+        tested.unregisterService(1002L);
+    }
 }

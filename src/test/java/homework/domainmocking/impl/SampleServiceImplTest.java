@@ -17,10 +17,21 @@ package homework.domainmocking.impl;
 
 import homework.domainmocking.EventService;
 import homework.domainmocking.PersonService;
+import homework.domainmocking.domain.BusinessMessages;
+import homework.domainmocking.domain.Person;
 import homework.domainmocking.domain.SampleServiceException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import static org.mockito.Matchers.anyString;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * The purpose of this test is to get 100% coverage of the
@@ -30,8 +41,8 @@ import org.junit.Test;
  * While doing this tutorial please refer to the documentation on how to mock
  * construction of new objects at the PowerMock web site.
  */
-// TODO Specify the PowerMock runner
-// TODO Specify which classes that must be prepared for test
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(SampleServiceImpl.class)
 public class SampleServiceImplTest {
 
 	private SampleServiceImpl tested;
@@ -40,43 +51,68 @@ public class SampleServiceImplTest {
 
 	@Before
 	public void setUp() {
-		// TODO Create a mock object of the PersonService and Event service class
-		// TODO Create a new instance of SampleServiceImpl and pass in the created mock objects to the constructor
+		personServiceMock = mock(PersonService.class);
+        eventService = mock(EventService.class);
+
+		tested = new SampleServiceImpl(personServiceMock, eventService);
 	}
 
 	@After
 	public void tearDown() {
-		// TODO Set all references to null or use the FieldDefaulter test listener
+        // XXX 完成 Set all references to null or use the FieldDefaulter test listener
+        // 注,FieldDefaulter方式是在类头定义@PowerMockListener(FieldDefaulter.class)以在测试完毕时自动把类属性置空
+        // 可以阅读文章:http://code.google.com/p/powermock/source/browse/wiki/TestListeners.wiki?spec=svn1498&r=1498
+		personServiceMock = null;
+        eventService = null;
+        tested = null;
 	}
 
 	@Test
 	public void testCreatePerson() throws Exception {
-        // TODO	Create a mock object of the BusinessMessages class and mock the a construction of "new BusinessMessages" and instead return the mock
-		// TODO Create a mock object of the Person class and mock the a construction of "new Person" and instead return the mock
-		// TODO Expect the call to personService.createPerson(..)
-		// TODO Expect the call to businessMessages.hasErrors(..) and make it return false
-		// TODO Replay all mock objects used and also replay the classes whose constructions were mocked
-		// TODO Perform the actual test and assert that the result is false
-		// TODO Verify all mock objects used and also verify the classes whose constructions were mocked
-	}
+        BusinessMessages businessMessages = mock(BusinessMessages.class);
+        whenNew(BusinessMessages.class).withNoArguments().thenReturn(businessMessages);
+        Person person = mock(Person.class);
+        whenNew(Person.class).withArguments(anyString(),anyString()).thenReturn(person);
+        doNothing().when(personServiceMock).create(person, businessMessages);
+
+        when(businessMessages.hasErrors()).thenReturn(false);
+
+        tested.createPerson("zhangfei","zhangyide");
+
+        PowerMockito.verifyNew(BusinessMessages.class).withNoArguments();
+        PowerMockito.verifyNew(Person.class).withArguments(anyString(),anyString());
+        InOrder inOrder = Mockito.inOrder(personServiceMock, businessMessages);
+        inOrder.verify(personServiceMock).create(person, businessMessages);
+        inOrder.verify(businessMessages).hasErrors();
+		}
 
 	@Test
 	public void testCreatePerson_error() throws Exception {
-		// TODO	Create a mock object of the BusinessMessages class and mock the a construction of "new BusinessMessages" and instead return the mock
-		// TODO Create a mock object of the Person class and mock the a construction of "new Person" and instead return the mock
-		// TODO Expect the call to personService.createPerson(..)
-		// TODO Expect the call to businessMessages.hasErrors(..) and make it return true
-		// TODO Expect the all to eventService.sendErrorEvent(..)
-		// TODO Replay all mock objects used and also replay the classes whose constructions were mocked
-		// TODO Perform the actual test and assert that the result is false
-		// TODO Verify all mock objects used and also verify the classes whose constructions were mocked
+        BusinessMessages businessMessages = mock(BusinessMessages.class);
+        whenNew(BusinessMessages.class).withNoArguments().thenReturn(businessMessages);
+        Person person = mock(Person.class);
+        whenNew(Person.class).withArguments(anyString(),anyString()).thenReturn(person);
+        doNothing().when(personServiceMock).create(person, businessMessages);
+
+        when(businessMessages.hasErrors()).thenReturn(true);
+        doNothing().when(eventService).sendErrorEvent(person, businessMessages);
+
+        tested.createPerson("zhangfei","zhangyide");
+
+        PowerMockito.verifyNew(BusinessMessages.class).withNoArguments();
+        PowerMockito.verifyNew(Person.class).withArguments(anyString(),anyString());
+        InOrder inOrder = Mockito.inOrder(personServiceMock, businessMessages, eventService);
+        inOrder.verify(personServiceMock).create(person, businessMessages);
+        inOrder.verify(businessMessages).hasErrors();
+        inOrder.verify(eventService);
 	}
 
 	@Test(expected = SampleServiceException.class)
 	public void testCreatePerson_illegalName() throws Exception {
-		// TODO Create a mock object of the Person class and mock the a construction of "new Person" but instead throw an IllegalArgumentException
-		// TODO Replay all mock objects used and also replay the classes whose constructions were mocked
-		// TODO Perform the actual test and assert that the result is false
-		// TODO Verify all mock objects used and also verify the classes whose constructions were mocked
-	}
+        BusinessMessages businessMessages = mock(BusinessMessages.class);
+        whenNew(BusinessMessages.class).withNoArguments().thenReturn(businessMessages);
+        whenNew(Person.class).withArguments(anyString(),anyString()).thenThrow(new IllegalArgumentException());
+
+        tested.createPerson("zhangfei","zhangyide");
+    }
 }

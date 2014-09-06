@@ -16,6 +16,13 @@
 package homework.hellopower;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * The purpose of this test is to get 100% coverage of the {@link HelloWorld}
@@ -25,15 +32,20 @@ import org.junit.Test;
  * While doing this tutorial please refer to the documentation on how to mock
  * static methods at the PowerMock web site.
  */
-// TODO Specify the PowerMock runner
-// TODO Specify which classes that must be prepared for test
+@RunWith(PowerMockRunner.class)
+
+@PrepareForTest(SimpleConfig.class)
 public class HelloWorldTest {
 
 	@Test
 	public void testGreeting() {
-		// TODO: mock the static methods of SimpleConfig
-		// TODO: Replay the behavior
-		// TODO: Perform the test of the greet method and assert that it returns the expected behavior
-		// TODO: Verify the behavior
+		mockStatic(SimpleConfig.class);
+        when(SimpleConfig.getGreeting()).thenReturn("greet");
+        when(SimpleConfig.getTarget()).thenReturn("Tom");
+
+        HelloWorld helloWorld = new HelloWorld();
+        assertThat(helloWorld.greet(), is("greet Tom"));
+
+		verifyStatic();
 	}
 }

@@ -16,9 +16,24 @@
 package homework.partialmocking.service.impl;
 
 import homework.partialmocking.dao.ProviderDao;
+import homework.partialmocking.domain.ServiceProducer;
+import homework.staticmocking.osgi.ServiceRegistration;
+import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.internal.util.reflection.Whitebox;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * The purpose of this test is to get 100% coverage of the
@@ -29,8 +44,8 @@ import org.junit.Test;
  * While doing this tutorial please refer to the documentation on how to expect
  * private methods and bypass encapsulation at the PowerMock web site.
  */
-// TODO Specify the PowerMock runner
-// TODO Specify which classes that must be prepared for test
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(ProviderServiceImpl.class)
 public class ProviderServiceImplTest {
 	
 	private ProviderServiceImpl tested;
@@ -39,33 +54,37 @@ public class ProviderServiceImplTest {
 
 	@Before
 	public void setUp() {
-		// TODO Create a mock object of the ProviderDao class
-		// TODO Create a new instance of ProviderServiceImpl
-		// TODO Set the providerDao mock to the providerDao field in the tested instance
+		providerDaoMock = mock(ProviderDao.class);
+		tested = spy(new ProviderServiceImpl());
+        Whitebox.setInternalState(tested, "providerDao", providerDaoMock);
 	}
 
 	@After
 	public void tearDown() {
-		// TODO Set all references to null
+		providerDaoMock = null;
+        tested = null;
 	}
 
 	@Test
 	public void testGetAllServiceProviders() throws Exception {
-		// TODO Create a partial mock of the ProviderServiceImpl mocking only the getAllServiceProducers method
-		// TODO Create a new HashSet of ServiceProducer's and add a ServiceProducer to the set
-		// TODO Expect the private method call to getAllServiceProducers and return the created HashSet
-		// TODO Replay all mock objects used
-		// TODO Perform the actual test and assert that the result matches the expectations  
-		// TODO Verify all mock objects used
+        HashSet<ServiceProducer> allServiceProduces = new HashSet<>();
+        ServiceProducer serviceProducer = mock(ServiceProducer.class);
+        allServiceProduces.add(serviceProducer);
+        when(tested,"getAllServiceProducers").thenReturn(allServiceProduces);
+
+        assertThat(tested.getAllServiceProviders(), Is.<Set<ServiceProducer>>is(allServiceProduces));
+
+        verifyPrivate(tested).invoke("getAllServiceProducers");
 	}
 
 	@Test
 	public void testGetAllServiceProviders_noServiceProvidersFound() throws Exception {
-		// TODO Create a partial mock of the ProviderServiceImpl mocking only the getAllServiceProducers method
-		// TODO Expect the private method call to getAllServiceProducers and return null
-		// TODO Replay all mock objects used
-		// TODO Perform the actual test and assert that the result matches the expectations 
-		// TODO Verify all mock objects used 
+        Set<ServiceProducer> allServiceProduces = Collections.emptySet();
+        when(tested,"getAllServiceProducers").thenReturn(null);
+
+        assertThat(tested.getAllServiceProviders(), is( allServiceProduces) );
+
+        verifyPrivate(tested).invoke("getAllServiceProducers");
 	}
 
 	@Test

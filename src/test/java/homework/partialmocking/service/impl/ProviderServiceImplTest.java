@@ -35,7 +35,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.powermock.api.mockito.PowerMockito.*;
@@ -78,26 +77,26 @@ public class ProviderServiceImplTest {
 //        HashSet<ServiceProducer> allServiceProduces = new HashSet<>();
 //        ServiceProducer serviceProducer = mock(ServiceProducer.class);
 //        allServiceProduces.add(serviceProducer);
-//        when(tested,"getAllServiceProducers2").thenReturn(allServiceProduces);
+//        when(tested,"getAllServiceProducers").thenReturn(allServiceProduces);
 //
 //        assertThat(tested.getAllServiceProviders(), Is.<Set<ServiceProducer>>is(allServiceProduces));
 //
-//        verifyPrivate(tested).invoke("getAllServiceProducers2");
+//        verifyPrivate(tested).invoke("getAllServiceProducers");
 //	}
 
     @Test
     public void testGetAllServiceProviders_noServiceProvidersFound() throws Exception {
 //        Set<ServiceProducer> allServiceProduces = Collections.emptySet();
         ProviderServiceImpl tested = PowerMockito.spy(new ProviderServiceImpl());
-//        Mockito.when(tested.getAllServiceProducers2()).thenReturn(null);
-        Mockito.doReturn(null).when(tested).getAllServiceProducers2();
-//        PowerMockito.when(tested,"getAllServiceProducers2").thenReturn(null);
-//        PowerMockito.when(tested, method(ProviderServiceImpl.class, "getAllServiceProducers2")).withNoArguments().thenReturn(null);
+//        PowerMockito.when(tested.getAllServiceProducers()).thenReturn(null);
+        PowerMockito.doReturn(null).when(tested).getAllServiceProducers();
+//        PowerMockito.when(tested,"getAllServiceProducers").thenReturn(null);
+//        PowerMockito.when(tested, method(ProviderServiceImpl.class, "getAllServiceProducers")).withNoArguments().thenReturn(null);
 
         tested.getAllServiceProviders();
         assertThat(tested.getAllServiceProviders(), Matchers.empty());
 
-//        PowerMockito.verifyPrivate(tested).invoke("getAllServiceProducers2");
+//        PowerMockito.verifyPrivate(tested).invoke("getAllServiceProducers");
     }
 
     //	@Test
@@ -106,11 +105,11 @@ public class ProviderServiceImplTest {
 //        ServiceProducer serviceProducer = mock(ServiceProducer.class);
 //        when(serviceProducer.getId()).thenReturn(12);
 //        allServiceProduces.add(serviceProducer);
-//        PowerMockito.when(tested, method(ProviderServiceImpl.class, "getAllServiceProducers2")).withNoArguments().thenReturn(allServiceProduces);
+//        PowerMockito.when(tested, method(ProviderServiceImpl.class, "getAllServiceProducers")).withNoArguments().thenReturn(allServiceProduces);
 //
 //        assertThat(tested.getServiceProvider(12), is(serviceProducer));
 //
-//        verifyPrivate(tested).invoke("getAllServiceProducers2");
+//        verifyPrivate(tested).invoke("getAllServiceProducers");
 //        Mockito.verify(serviceProducer).getId();
 //	}
 //
@@ -120,11 +119,11 @@ public class ProviderServiceImplTest {
 //        ServiceProducer serviceProducer = mock(ServiceProducer.class);
 //        when(serviceProducer.getId()).thenReturn(12);
 //        allServiceProduces.add(serviceProducer);
-//        PowerMockito.when(tested,"getAllServiceProducers2").thenReturn(allServiceProduces);
+//        PowerMockito.when(tested,"getAllServiceProducers").thenReturn(allServiceProduces);
 //
 //        assertThat(tested.getServiceProvider(11), null);
 //
-//        verifyPrivate(tested).invoke("getAllServiceProducers2");
+//        verifyPrivate(tested).invoke("getAllServiceProducers");
 //        Mockito.verify(serviceProducer).getId();
 //	}
 //
@@ -145,19 +144,18 @@ public class ProviderServiceImplTest {
         ServiceProducer serviceProducer = new ServiceProducer(1, "name1", dataProducers);
 
 
-        Set<ServiceProducer> resultServiceProducers = Whitebox.invokeMethod(tested, "getAllServiceProducers2");
+        Set<ServiceProducer> resultServiceProducers = Whitebox.invokeMethod(tested, "getAllServiceProducers");
 
         assertThat(resultServiceProducers.size(), is(1));
         assertThat(resultServiceProducers, contains(serviceProducer));
     }
 
-    //
     @Test
     public void getAllServiceProducers_empty() throws Exception {
         HashSet<ServiceArtifact> serviceArtifacts = new HashSet<ServiceArtifact>();
         when(providerDaoMock.getAllServiceProducers()).thenReturn(serviceArtifacts);
 
-        Set<ServiceProducer> resultServiceProducers = Whitebox.invokeMethod(tested, "getAllServiceProducers2");
+        Set<ServiceProducer> resultServiceProducers = Whitebox.invokeMethod(tested, "getAllServiceProducers");
 
         assertThat(resultServiceProducers, Matchers.empty());
 

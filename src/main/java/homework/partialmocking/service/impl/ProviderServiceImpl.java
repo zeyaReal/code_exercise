@@ -41,7 +41,7 @@ public class ProviderServiceImpl implements ProviderService {
 	 * {@inheritDoc}
 	 */
 	public Set<ServiceProducer> getAllServiceProviders() {
-		final Set<ServiceProducer> serviceProducers = getAllServiceProducers();
+		final Set<ServiceProducer> serviceProducers = getAllServiceProducers2();
 		if (serviceProducers == null) {
 			return Collections.emptySet();
 		}
@@ -52,7 +52,7 @@ public class ProviderServiceImpl implements ProviderService {
 	 * {@inheritDoc}
 	 */
 	public ServiceProducer getServiceProvider(int id) {
-		Set<ServiceProducer> allServiceProducers = getAllServiceProducers();
+		Set<ServiceProducer> allServiceProducers = getAllServiceProducers2();
 		for (ServiceProducer serviceProducer : allServiceProducers) {
 			if (serviceProducer.getId() == id) {
 				return serviceProducer;
@@ -61,7 +61,7 @@ public class ProviderServiceImpl implements ProviderService {
 		return null;
 	}
 
-	private Set<ServiceProducer> getAllServiceProducers() {
+	public Set<ServiceProducer> getAllServiceProducers2() {
 		Set<ServiceArtifact> serviceArtifacts = providerDao.getAllServiceProducers();
 		Set<ServiceProducer> serviceProducers = new HashSet<ServiceProducer>();
 

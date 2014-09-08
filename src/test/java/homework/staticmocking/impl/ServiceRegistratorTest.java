@@ -99,7 +99,7 @@ public class ServiceRegistratorTest {
 	 */
 	@Test
 	public void testUnregisterService() throws Exception {
-        Map<Long, ServiceRegistration> serviceRegistrations = new HashMap<>();
+        Map<Long, ServiceRegistration> serviceRegistrations = new HashMap<Long, ServiceRegistration>();
         serviceRegistrations.put(1002L, serviceRegistrationMock);
         Whitebox.setInternalState(tested, "serviceRegistrations", serviceRegistrations);
         doNothing().when(serviceRegistrationMock).unregister();

@@ -61,7 +61,7 @@ public class ProviderServiceImpl implements ProviderService {
 		return null;
 	}
 
-	public Set<ServiceProducer> getAllServiceProducers() {
+	private Set<ServiceProducer> getAllServiceProducers() {
 		Set<ServiceArtifact> serviceArtifacts = providerDao.getAllServiceProducers();
 		Set<ServiceProducer> serviceProducers = new HashSet<ServiceProducer>();
 

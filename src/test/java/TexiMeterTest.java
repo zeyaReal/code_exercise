@@ -44,5 +44,10 @@ public class TexiMeterTest {
         assertThat(texiMeter.fareForDistance(9.0f), is(17.25f));
     }
 
+    @Test
+    public void test_fareForDistance_should_return_19_5_when_distance_is_10_0_kilometer() throws Exception {
+        TexiMeter texiMeter = new TexiMeter();
+        assertThat(texiMeter.fareForDistance(10.0f), is(19.50f));
+    }
 
 }

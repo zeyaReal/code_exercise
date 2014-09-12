@@ -3,13 +3,17 @@
  */
 public class TexiMeter {
 
+    public static final int INITIAL_DISTANCE_KILOMETER = 2;
+    public static final float INITIAL_FARE = 6.00f;
+    public static final float BASE_FARE_RATE = 1.50f;
+
     public float fareForDistance(float distanceKilometer) {
         if (distanceKilometer <= 0) {
             return 0;
         }
-        if (distanceKilometer <= 2) {
-            return 6;
+        if (distanceKilometer <= INITIAL_DISTANCE_KILOMETER) {
+            return INITIAL_FARE;
         }
-        return 6 + (distanceKilometer - 2) * 1.50f;
+        return INITIAL_FARE + (distanceKilometer - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_RATE;
     }
 }

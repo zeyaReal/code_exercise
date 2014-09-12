@@ -11,29 +11,33 @@ public class TexiMeter {
 
     public static final float SPECIAL_FARE_RATE = 1.50f;
 
-    public float fareForDistance(float distanceKilometer) {
-        if (distanceKilometer <= 0) {
+    public float fareForDistance(float distanceKilometers) {
+        if (distanceKilometers <= 0) {
             return 0;
         }
 
-        return INITIAL_FARE + countBasefare(distanceKilometer) + countSpecialFare(distanceKilometer);
+        return INITIAL_FARE + countBasefare(distanceKilometers) + countSpecialFare(distanceKilometers);
     }
 
-    private float countSpecialFare(float distanceKilometer) {
-        if (distanceKilometer > BASE_DISTANCE_KILOMETER) {
-            return (distanceKilometer - BASE_DISTANCE_KILOMETER) * BASE_FARE_PER_KILOMETER * SPECIAL_FARE_RATE;
+    private float countSpecialFare(float distanceKilometers) {
+        if (distanceKilometers > BASE_DISTANCE_KILOMETER) {
+            return (distanceKilometers - BASE_DISTANCE_KILOMETER) * BASE_FARE_PER_KILOMETER * SPECIAL_FARE_RATE;
         }
         return 0;
     }
 
-    private float countBasefare(float distanceKilometer) {
-        if (distanceKilometer > INITIAL_DISTANCE_KILOMETER) {
-             return (Math.min(distanceKilometer, BASE_DISTANCE_KILOMETER) - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_PER_KILOMETER;
+    private float countBasefare(float distanceKilometers) {
+        if (distanceKilometers > INITIAL_DISTANCE_KILOMETER) {
+             return (Math.min(distanceKilometers, BASE_DISTANCE_KILOMETER) - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_PER_KILOMETER;
         }
         return 0;
     }
 
-    public int roundFareForDistance(float distanceKilometer) {
-        return Math.round(fareForDistance(distanceKilometer));
+    public int roundFareForDistance(float distanceKilometers) {
+        return Math.round(fareForDistance(distanceKilometers));
+    }
+
+    public float fareForDistanceAndWaitingMinutes(float distanceKilometer, int waitingMinutes) {
+        return 17.75f;
     }
 }

@@ -62,4 +62,11 @@ public class TexiMeterTest {
         assertThat(texiMeter.roundFareForDistance(9.0f), is(17));
     }
 
+    @Test
+    public void test_fareForDistanceAndWaitingMinutes_should_return_17_75_when_distance_is_9_0_kilometer_and_waiting_2_minutes() throws Exception {
+        TexiMeter texiMeter = new TexiMeter();
+        assertThat(texiMeter.fareForDistanceAndWaitingMinutes(9.0f, 2), is(17.75f));
+    }
+
+
 }

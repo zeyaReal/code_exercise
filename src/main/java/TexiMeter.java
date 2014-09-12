@@ -43,10 +43,14 @@ public class TexiMeter {
     }
 
     public int roundFareForDistance(float distanceKilometers) {
-        return Math.round(fareForDistance(distanceKilometers));
+        return Math.round(fareForDistance(distanceKilometers, 0));
     }
 
     public float fareForDistanceAndWaitingMinutes(float distanceKilometer, int waitingMinutes) {
         return fareForDistance(distanceKilometer, waitingMinutes);
+    }
+
+    public int roundFareForDistanceAndWaitingMinutes(float distanceKilometers, int waitingMinutes) {
+        return Math.round(fareForDistance(distanceKilometers, waitingMinutes));
     }
 }

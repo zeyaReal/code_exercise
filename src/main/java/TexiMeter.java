@@ -32,4 +32,8 @@ public class TexiMeter {
         }
         return 0;
     }
+
+    public int roundFareForDistance(float distanceKilometer) {
+        return Math.round(fareForDistance(distanceKilometer));
+    }
 }

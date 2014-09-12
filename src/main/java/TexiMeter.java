@@ -14,6 +14,11 @@ public class TexiMeter {
         if (distanceKilometer <= INITIAL_DISTANCE_KILOMETER) {
             return INITIAL_FARE;
         }
-        return INITIAL_FARE + (distanceKilometer - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_RATE;
+
+        if (distanceKilometer <= 8) {
+            return INITIAL_FARE + (distanceKilometer - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_RATE;
+        }
+
+        return INITIAL_FARE + ( 8 - INITIAL_DISTANCE_KILOMETER ) * BASE_FARE_RATE + (distanceKilometer - 8) * BASE_FARE_RATE * 1.50f;
     }
 }

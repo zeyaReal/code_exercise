@@ -21,7 +21,12 @@ public class TexiMeter {
             return 0;
         }
 
-        return INITIAL_FARE + countBaseFare(distanceKilometers) + countSpecialFare(distanceKilometers) + countWaitingFare(waitingMinutes);
+        float totalFare = INITIAL_FARE;
+        totalFare += countBaseFare(distanceKilometers);
+        totalFare += countSpecialFare(distanceKilometers);
+        totalFare += countWaitingFare(waitingMinutes);
+
+        return totalFare;
     }
 
     private float countWaitingFare(int waitingMinutes) {
@@ -37,7 +42,7 @@ public class TexiMeter {
 
     private float countBaseFare(float distanceKilometers) {
         if (distanceKilometers > INITIAL_DISTANCE_KILOMETER) {
-             return (Math.min(distanceKilometers, BASE_DISTANCE_KILOMETER) - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_PER_KILOMETER;
+            return (Math.min(distanceKilometers, BASE_DISTANCE_KILOMETER) - INITIAL_DISTANCE_KILOMETER) * BASE_FARE_PER_KILOMETER;
         }
         return 0;
     }

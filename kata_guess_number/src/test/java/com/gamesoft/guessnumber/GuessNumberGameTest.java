@@ -55,4 +55,10 @@ public class GuessNumberGameTest {
         game.guess(new int[]{1,2});
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void test_should_raise_exception_when_input_1223() throws Exception {
+        game.guess(new int[]{1,2,2,3});
+    }
+
+
 }

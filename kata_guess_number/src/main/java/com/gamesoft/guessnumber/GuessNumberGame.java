@@ -14,7 +14,12 @@ public class GuessNumberGame {
         if (guessNumbers.length != this.answerNumbers.length)
             throw new IllegalArgumentException("wrong numbers");
 
-
+        for (int i = 0; i < guessNumbers.length; i++) {
+            for (int j = i+1; j < guessNumbers.length; j++) {
+                if (guessNumbers[i] == guessNumbers[j])
+                    throw new IllegalArgumentException("duplated numbers");
+            }
+        }
         int completeRightCount = 0;
         int wrongPositionCount = 0;
         for (int i = 0; i < guessNumbers.length; i++) {

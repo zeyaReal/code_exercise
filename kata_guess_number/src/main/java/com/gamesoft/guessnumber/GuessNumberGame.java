@@ -12,11 +12,26 @@ public class GuessNumberGame {
 
     public String guess(int[] guessNumbers) {
         int completeRightCount = 0;
-        for (int i = 0; i < this.answerNumbers.length; i++) {
-            if (this.answerNumbers[i] == guessNumbers[i]){
+        int wrongPositionCount = 0;
+        for (int i = 0; i < guessNumbers.length; i++) {
+            if (guessNumbers[i] == this.answerNumbers[i]) {
                 completeRightCount++;
             }
+
+            int index = findNumberIndex(guessNumbers[i]);
+            if (index >=0 && index != i) {
+                wrongPositionCount++;
+            }
         }
-        return completeRightCount+"A0B";
+        return completeRightCount + "A" + wrongPositionCount +"B";
+    }
+
+    private int findNumberIndex(int guessNumber) {
+        for (int i = 0; i < this.answerNumbers.length; i++) {
+            if (guessNumber == this.answerNumbers[i]) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

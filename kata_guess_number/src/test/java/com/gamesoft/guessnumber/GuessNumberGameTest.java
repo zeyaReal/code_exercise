@@ -38,4 +38,10 @@ public class GuessNumberGameTest {
         assertThat(game.guess(new int[]{1, 2, 3, 4}), is("4A0B"));
     }
 
+    @Test
+    public void test_should_return_0A1B_when_input_5170() throws Exception {
+        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
+        assertThat(game.guess(new int[]{5,1,7,0}), is("0A1B"));
+    }
+
 }

@@ -3,8 +3,6 @@ package com.gamesoft.guessnumber;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.security.InvalidParameterException;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -17,7 +15,7 @@ public class GuessNumberGameTest {
 
     @Before
     public void setUp() {
-        game = new GuessNumberGame(new int[]{1,2,3,4});
+        game = GuessNumberGame.createGuessNumberGame(new int[]{1, 2, 3, 4});
     }
 
     @Test

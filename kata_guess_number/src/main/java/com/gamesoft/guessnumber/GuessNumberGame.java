@@ -6,24 +6,26 @@ package com.gamesoft.guessnumber;
 public class GuessNumberGame {
     private int[] answerNumbers;
 
-    public GuessNumberGame(int[] answerNumbers) {
+    private GuessNumberGame(int[] answerNumbers) {
         this.answerNumbers = answerNumbers;
     }
 
-    public String guess(int[] guessNumbers) {
-        if (guessNumbers.length != this.answerNumbers.length)
-            throw new IllegalArgumentException("wrong numbers");
+    public static GuessNumberGame createGuessNumberGame(int[] answerNumbers) {
+        return new GuessNumberGame(answerNumbers);
+    }
 
-        for (int i = 0; i < guessNumbers.length; i++) {
-            for (int j = i+1; j < guessNumbers.length; j++) {
-                if (guessNumbers[i] == guessNumbers[j])
-                    throw new IllegalArgumentException("duplated numbers");
-            }
-        }
+    public String guess(int[] inoutNumbers) {
+        checkWrongNumber(inoutNumbers);
+        checkDuplicatedNumber(inoutNumbers);
+
+        return judgeValidInputNumber(inoutNumbers);
+    }
+
+    private String judgeValidInputNumber(int[] inputNumbers) {
         int completeRightCount = 0;
         int wrongPositionCount = 0;
-        for (int i = 0; i < guessNumbers.length; i++) {
-            int index = findNumberIndexInAnswer(guessNumbers[i]);
+        for (int i = 0; i < inputNumbers.length; i++) {
+            int index = findNumberIndexInAnswer(inputNumbers[i]);
 
             if (index < 0) continue;
 
@@ -33,6 +35,20 @@ public class GuessNumberGame {
                 wrongPositionCount++;
         }
         return completeRightCount + "A" + wrongPositionCount +"B";
+    }
+
+    private void checkWrongNumber(int[] guessNumbers) {
+        if (guessNumbers.length != this.answerNumbers.length)
+            throw new IllegalArgumentException("wrong numbers");
+    }
+
+    private void checkDuplicatedNumber(int[] guessNumbers) {
+        for (int i = 0; i < guessNumbers.length; i++) {
+            for (int j = i+1; j < guessNumbers.length; j++) {
+                if (guessNumbers[i] == guessNumbers[j])
+                    throw new IllegalArgumentException("duplicated numbers");
+            }
+        }
     }
 
     private int findNumberIndexInAnswer(int guessNumber) {

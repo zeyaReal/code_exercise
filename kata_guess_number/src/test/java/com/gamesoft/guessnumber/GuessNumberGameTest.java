@@ -22,4 +22,16 @@ public class GuessNumberGameTest {
         assertThat(game.guess(new int[]{1,2,6,7}), is("2A0B"));
     }
 
+    @Test
+    public void test_should_return_3A0B_when_input_1237() throws Exception {
+        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
+        assertThat(game.guess(new int[]{1,2,3,7}), is("3A0B"));
+    }
+
+    @Test
+    public void test_should_return_4A0B_when_input_1234() throws Exception {
+        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
+        assertThat(game.guess(new int[]{1,2,3,4}), is("4A0B"));
+    }
+
 }

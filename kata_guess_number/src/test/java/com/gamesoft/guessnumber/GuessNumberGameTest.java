@@ -15,4 +15,11 @@ public class GuessNumberGameTest {
         GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
         assertThat(game.guess(new int[]{1,5,6,7}), is("1A0B"));
     }
+
+    @Test
+    public void test_should_return_2A0B_when_input_1267() throws Exception {
+        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
+        assertThat(game.guess(new int[]{1,2,6,7}), is("2A0B"));
+    }
+
 }

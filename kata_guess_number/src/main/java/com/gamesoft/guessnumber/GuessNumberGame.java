@@ -11,6 +11,12 @@ public class GuessNumberGame {
     }
 
     public String guess(int[] guessNumbers) {
-        return "1A0B";
+        int completeRightCount = 0;
+        for (int i = 0; i < this.answerNumbers.length; i++) {
+            if (this.answerNumbers[i] == guessNumbers[i]){
+                completeRightCount++;
+            }
+        }
+        return completeRightCount+"A0B";
     }
 }

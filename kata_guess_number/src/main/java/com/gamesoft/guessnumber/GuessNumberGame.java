@@ -14,19 +14,19 @@ public class GuessNumberGame {
         int completeRightCount = 0;
         int wrongPositionCount = 0;
         for (int i = 0; i < guessNumbers.length; i++) {
-            int index = findNumberIndex(guessNumbers[i]);
+            int index = findNumberIndexInAnswer(guessNumbers[i]);
+
             if (index < 0) continue;
-            if (index == i) {
+
+            if (index == i)
                 completeRightCount++;
-            }
-            else{
+            else
                 wrongPositionCount++;
-            }
         }
         return completeRightCount + "A" + wrongPositionCount +"B";
     }
 
-    private int findNumberIndex(int guessNumber) {
+    private int findNumberIndexInAnswer(int guessNumber) {
         for (int i = 0; i < this.answerNumbers.length; i++) {
             if (guessNumber == this.answerNumbers[i]) {
                 return i;

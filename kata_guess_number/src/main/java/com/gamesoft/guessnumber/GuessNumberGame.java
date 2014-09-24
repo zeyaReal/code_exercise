@@ -14,12 +14,12 @@ public class GuessNumberGame {
         int completeRightCount = 0;
         int wrongPositionCount = 0;
         for (int i = 0; i < guessNumbers.length; i++) {
-            if (guessNumbers[i] == this.answerNumbers[i]) {
+            int index = findNumberIndex(guessNumbers[i]);
+            if (index < 0) continue;
+            if (index == i) {
                 completeRightCount++;
             }
-
-            int index = findNumberIndex(guessNumbers[i]);
-            if (index >=0 && index != i) {
+            else{
                 wrongPositionCount++;
             }
         }

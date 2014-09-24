@@ -44,4 +44,11 @@ public class GuessNumberGameTest {
         assertThat(game.guess(new int[]{5,1,7,0}), is("0A1B"));
     }
 
+    @Test
+    public void test_should_return_1A2B_when_input_5132() throws Exception {
+        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
+        assertThat(game.guess(new int[]{5,1,3,2}), is("1A2B"));
+    }
+
+
 }

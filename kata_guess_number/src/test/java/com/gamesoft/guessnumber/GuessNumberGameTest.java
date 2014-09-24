@@ -3,6 +3,8 @@ package com.gamesoft.guessnumber;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.security.InvalidParameterException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -40,15 +42,17 @@ public class GuessNumberGameTest {
 
     @Test
     public void test_should_return_0A1B_when_input_5170() throws Exception {
-        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
         assertThat(game.guess(new int[]{5,1,7,0}), is("0A1B"));
     }
 
     @Test
     public void test_should_return_1A2B_when_input_5132() throws Exception {
-        GuessNumberGame game = new GuessNumberGame(new int[]{1,2,3,4});
         assertThat(game.guess(new int[]{5,1,3,2}), is("1A2B"));
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void test_should_raise_exception_when_input_12() throws Exception {
+        game.guess(new int[]{1,2});
+    }
 
 }

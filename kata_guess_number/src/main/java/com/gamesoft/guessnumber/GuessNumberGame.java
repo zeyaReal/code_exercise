@@ -11,6 +11,10 @@ public class GuessNumberGame {
     }
 
     public String guess(int[] guessNumbers) {
+        if (guessNumbers.length != this.answerNumbers.length)
+            throw new IllegalArgumentException("wrong numbers");
+
+
         int completeRightCount = 0;
         int wrongPositionCount = 0;
         for (int i = 0; i < guessNumbers.length; i++) {

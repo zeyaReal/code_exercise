@@ -32,6 +32,9 @@ public class RandomAnswerGeneratorTest {
         when(mockRandom.nextInt(7)).thenReturn(0);
         when(mockRandom.nextInt(6)).thenReturn(0);
 
+        //XXX 问题：
+        //1.随机生成器不用类变量就必须用PowerMock么？
+        //2.hamcrest中比数组的比较器是哪个？
 //        assertThat(gameAnswerGenerator.randomGenerate(),  array(new int[]{1, 2, 3, 4}));
         assertArrayEquals(gameAnswerGenerator.randomGenerate(), new int[]{0, 1, 2, 3});
 

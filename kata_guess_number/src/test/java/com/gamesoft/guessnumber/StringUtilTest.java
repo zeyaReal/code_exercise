@@ -15,4 +15,15 @@ public class StringUtilTest {
         assertThat(StringUtil.convertToIntArray(" 1   5 6    7 "), equalTo(new int[]{1,5,6,7}));
     }
 
+    @Test
+    public void test_should_return_int_array_1_5_when_input_2__5_string() throws Exception {
+        assertThat(StringUtil.convertToIntArray(" 2  5"), equalTo(new int[]{2,5}));
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void test_should_raise_exception_when_input_nonnumeric_string() throws Exception {
+        StringUtil.convertToIntArray(" c1 ");
+    }
+
 }

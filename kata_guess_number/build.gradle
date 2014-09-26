@@ -29,7 +29,8 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile (
                 'junit:junit:4.11',
-                'org.mockito:mockito-all:1.9.5'
+                'org.mockito:mockito-all:1.9.5',
+                'org.hamcrest:hamcrest-all:1.3'
     )
 }
 

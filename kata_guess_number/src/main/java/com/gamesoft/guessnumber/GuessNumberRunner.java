@@ -16,8 +16,11 @@ public class GuessNumberRunner {
 
         while(game.canTryAgain()) {
             try {
+                System.out.print("please input 4 numbers:");
                 int[] userGuessNumbers = readUserGuessNumbers(sc);
+
                 System.out.println(game.guess(userGuessNumbers));
+
                 if (game.isWin()) {
                     System.out.println("Congratulations, you win !");
                     return;
@@ -37,7 +40,6 @@ public class GuessNumberRunner {
     }
 
     private static int[] readUserGuessNumbers(Scanner sc) {
-        System.out.print("please input 4 numbers:");
         String inputString = sc.nextLine();
         return StringUtil.convertToIntArray(inputString);
     }

@@ -75,5 +75,4 @@ public class GuessNumberGameTest {
         assertThat(game.canTryAgain(), is(false));
     }
 
-
 }

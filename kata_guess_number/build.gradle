@@ -10,6 +10,7 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'idea'
+//apply plugin: 'us.kirchmeier.capsule'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -20,6 +21,8 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
+
+  //  classpath 'us.kirchmeier:gradle-capsule-plugin:0.9.0'
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.5'
 
@@ -37,4 +40,14 @@ dependencies {
 task "create-dirs" << {
     sourceSets*.java.srcDirs*.each { it.mkdirs() }
     //sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+//task fatCapsule(type: FatCapsule) {
+//  applicationClass 'com.gamesoft.guessnumber.GuessNumberRunner'
+//}
+
+jar {
+   manifest {
+      attributes 'Main-Class': 'com.gamesoft.guessnumber.GuessNumberRunner'
+   }
 }

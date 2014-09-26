@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 
 /**
@@ -75,4 +76,7 @@ public class GuessNumberGameTest {
         assertThat(game.canTryAgain(), is(false));
     }
 
+    public void test_should_return_1_2_3_4_when_get_answer() throws Exception {
+        assertThat(game.getAnswer(), equalTo(new int[]{1, 2, 3, 4}));
+    }
 }

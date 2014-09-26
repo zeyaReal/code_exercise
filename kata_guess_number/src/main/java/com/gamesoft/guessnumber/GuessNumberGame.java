@@ -82,4 +82,8 @@ public class GuessNumberGame {
     public boolean canTryAgain() {
         return currentGuessNum < this.maxTryNum;
     }
+
+    public int[] getAnswer() {
+        return this.answerNumbers;
+    }
 }

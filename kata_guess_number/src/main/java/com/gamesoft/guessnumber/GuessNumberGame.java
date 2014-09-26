@@ -5,6 +5,7 @@ package com.gamesoft.guessnumber;
  */
 public class GuessNumberGame {
     private int[] answerNumbers;
+    private boolean isWin = false;
 
     private GuessNumberGame(int[] answerNumbers) {
         this.answerNumbers = answerNumbers;
@@ -18,10 +19,10 @@ public class GuessNumberGame {
         checkWrongNumber(inoutNumbers);
         checkDuplicatedNumber(inoutNumbers);
 
-        return judgeValidInputNumber(inoutNumbers);
+        return guessValidInputNumber(inoutNumbers);
     }
 
-    private String judgeValidInputNumber(int[] inputNumbers) {
+    private String guessValidInputNumber(int[] inputNumbers) {
         int completeRightCount = 0;
         int wrongPositionCount = 0;
         for (int i = 0; i < inputNumbers.length; i++) {
@@ -34,7 +35,14 @@ public class GuessNumberGame {
             else
                 wrongPositionCount++;
         }
+        setWinflag(completeRightCount);
         return completeRightCount + "A" + wrongPositionCount +"B";
+    }
+
+    private void setWinflag(int completeRightCount) {
+        if (completeRightCount == answerNumbers.length){
+            this.isWin = true;
+        }
     }
 
     private void checkWrongNumber(int[] guessNumbers) {
@@ -58,5 +66,9 @@ public class GuessNumberGame {
             }
         }
         return -1;
+    }
+
+    public boolean isWin() {
+        return isWin;
     }
 }

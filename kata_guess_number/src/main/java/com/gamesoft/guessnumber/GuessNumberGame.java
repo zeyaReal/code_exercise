@@ -6,6 +6,8 @@ package com.gamesoft.guessnumber;
 public class GuessNumberGame {
     private int[] answerNumbers;
     private boolean isWin = false;
+    private int maxTryNum;
+    private int currentGuessNum = 0;
 
     private GuessNumberGame(int[] answerNumbers) {
         this.answerNumbers = answerNumbers;
@@ -35,12 +37,13 @@ public class GuessNumberGame {
             else
                 wrongPositionCount++;
         }
+        this.currentGuessNum++;
         setWinflag(completeRightCount);
-        return completeRightCount + "A" + wrongPositionCount +"B";
+        return completeRightCount + "A" + wrongPositionCount + "B";
     }
 
     private void setWinflag(int completeRightCount) {
-        if (completeRightCount == answerNumbers.length){
+        if (completeRightCount == answerNumbers.length) {
             this.isWin = true;
         }
     }
@@ -52,7 +55,7 @@ public class GuessNumberGame {
 
     private void checkDuplicatedNumber(int[] guessNumbers) {
         for (int i = 0; i < guessNumbers.length; i++) {
-            for (int j = i+1; j < guessNumbers.length; j++) {
+            for (int j = i + 1; j < guessNumbers.length; j++) {
                 if (guessNumbers[i] == guessNumbers[j])
                     throw new IllegalArgumentException("duplicated numbers");
             }
@@ -70,5 +73,13 @@ public class GuessNumberGame {
 
     public boolean isWin() {
         return isWin;
+    }
+
+    public void setMaxTry(int maxTryNum) {
+        this.maxTryNum = maxTryNum;
+    }
+
+    public boolean canTryAgain() {
+        return currentGuessNum < this.maxTryNum;
     }
 }

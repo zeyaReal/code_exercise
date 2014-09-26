@@ -59,10 +59,20 @@ public class GuessNumberGameTest {
     }
 
     @Test
-    public void test_should_win_when_input_1234() throws Exception {
+    public void test_should_win_game_when_input_1234() throws Exception {
         assertThat(game.isWin(), is(false));
         game.guess(new int[]{1, 2, 3, 4});
         assertThat(game.isWin(), is(true));
+    }
+
+    @Test
+    public void test_should_guess_2_times_when_set_max_try_2() throws Exception {
+        game.setMaxTry(2);
+        assertThat(game.canTryAgain(), is(true));
+        game.guess(new int[]{2, 4, 3, 5});
+        assertThat(game.canTryAgain(), is(true));
+        game.guess(new int[]{2, 4, 3, 5});
+        assertThat(game.canTryAgain(), is(false));
     }
 
 

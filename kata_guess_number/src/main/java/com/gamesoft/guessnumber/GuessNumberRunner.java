@@ -1,5 +1,6 @@
 package com.gamesoft.guessnumber;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -18,14 +19,14 @@ public class GuessNumberRunner {
                 int[] userGuessNumbers = readUserGuessNumbers(sc);
                 System.out.println(game.guess(userGuessNumbers));
                 if (game.isWin()) {
-                    System.out.print("Congratulations, you win !");
+                    System.out.println("Congratulations, you win !");
                     return;
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("wrong input. please try again...");
             }
         }
-        System.out.println("Sorry, you lost !");
+        System.out.println("Sorry, you lost ! The answer is " + Arrays.toString(game.getAnswer()));
     }
 
     private static GuessNumberGame createRandomGuessNumberGame() {

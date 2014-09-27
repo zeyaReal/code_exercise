@@ -26,4 +26,12 @@ public class StringUtilTest {
         StringUtil.convertToIntArray(" c1 ");
     }
 
+    @Test
+    /**
+     * 本测试非题目要求（题目要求输入数字必须要空格分隔），只是为了提高游戏易用性增加
+     */
+    public void test_should_return_int_array_1_5_6_7when_input_1567_string() throws Exception {
+        assertThat(StringUtil.convertToIntArray("1567"), equalTo(new int[]{1,5,6,7}));
+    }
+
 }

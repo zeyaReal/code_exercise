@@ -79,4 +79,10 @@ public class GuessNumberGameTest {
     public void test_should_return_1_2_3_4_when_get_answer() throws Exception {
         assertThat(game.getAnswer(), equalTo(new int[]{1, 2, 3, 4}));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void test_should_raise_exception_when_input_number_beyond_9() throws Exception {
+        game.guess(new int[]{1, 12, 2, 3});
+    }
+
 }

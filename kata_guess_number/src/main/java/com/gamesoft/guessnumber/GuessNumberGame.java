@@ -4,6 +4,7 @@ package com.gamesoft.guessnumber;
  * Created by zeya on 14-9-23.
  */
 public class GuessNumberGame {
+    public static final int MAX_NUMBER = 9;
     private int[] answerNumbers;
     private boolean isWin = false;
     private int maxTryNum;
@@ -17,11 +18,12 @@ public class GuessNumberGame {
         return new GuessNumberGame(answerNumbers);
     }
 
-    public String guess(int[] inoutNumbers) {
-        checkWrongNumber(inoutNumbers);
-        checkDuplicatedNumber(inoutNumbers);
+    public String guess(int[] inputNumbers) {
+        checkWrongNumber(inputNumbers);
+        checkNumberBeyondRange(inputNumbers);
+        checkDuplicatedNumber(inputNumbers);
 
-        return guessValidInputNumber(inoutNumbers);
+        return guessValidInputNumber(inputNumbers);
     }
 
     private String guessValidInputNumber(int[] inputNumbers) {
@@ -51,6 +53,13 @@ public class GuessNumberGame {
     private void checkWrongNumber(int[] guessNumbers) {
         if (guessNumbers.length != this.answerNumbers.length)
             throw new IllegalArgumentException("wrong numbers");
+    }
+
+    private void checkNumberBeyondRange(int[] guessNumbers) {
+        for (int i = 0; i < guessNumbers.length; i++) {
+            if (guessNumbers[i] > MAX_NUMBER)
+                throw new IllegalArgumentException("number " + guessNumbers[i] + " beyond max number" + MAX_NUMBER);
+        }
     }
 
     private void checkDuplicatedNumber(int[] guessNumbers) {

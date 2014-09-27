@@ -39,12 +39,13 @@ public class PreciseTexiMeterTest {
     }
 
     /**
-     *  XXX tip(junit参数化) : 准备数据的参数化方法。
-     *  该方法需要满足：
-     *  1）该方法需要Parameters注解修饰
-     *  2）该方法需要为public static类型
-     *  3）该方法需要返回Collection类型
-     *  4）该方法没有参数，名字随意
+     * XXX tip(junit参数化) : 准备数据的参数化方法。
+     * 该方法需要满足：
+     * 1）该方法需要Parameters注解修饰
+     * 2）该方法需要为public static类型
+     * 3）该方法需要返回Collection类型
+     * 4）该方法没有参数，名字随意
+     *
      * @return
      */
     @Parameterized.Parameters

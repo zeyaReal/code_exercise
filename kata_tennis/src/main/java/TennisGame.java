@@ -20,9 +20,6 @@ public class TennisGame {
         if (rightScore == 3)
             return "love forty";
 
-        if (leftScore == 0)
-            return "love all";
-
         return SCORE[this.leftScore] + " love";
     }
 

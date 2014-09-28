@@ -3,16 +3,13 @@
  */
 public class TennisGame {
 
+    private static final String[] SCORE = new String[]{"", "fifteen", "thirty", "forty"};
+
     private int leftScore = 0;
 
     public String score() {
-        String[] score = new String[]{"", "fifteen", "thirty", "forty"};
-        if (leftScore == 1)
-            return score[1] + " love";
-        if (leftScore == 2)
-            return score[2] + " love";
-        if (leftScore == 3)
-            return score[3] + " love";
+        if (leftScore != 0)
+            return SCORE[this.leftScore] + " love";
         return "love all";
     }
 

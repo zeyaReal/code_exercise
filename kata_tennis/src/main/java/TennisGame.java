@@ -9,6 +9,10 @@ public class TennisGame {
     private int rightScore = 0;
 
     public String score() {
+
+        if (leftScore == rightScore && leftScore == 0)
+            return "love all";
+
         if (rightScore == 1)
             return "love fifteen";
         if (rightScore == 2)

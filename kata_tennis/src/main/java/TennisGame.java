@@ -7,6 +7,8 @@ public class TennisGame {
     public String score() {
         if (leftScore == 1)
             return "fifteen love";
+        if (leftScore == 2)
+            return "thirty love";
         return "love all";
     }
 

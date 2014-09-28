@@ -27,4 +27,11 @@ public class TennisGameTest {
         assertThat(game.score(), is("fifteen love"));
     }
 
+    @Test
+    public void test_shouuld_be_thirty_lovel_when_game_score_2_0() throws Exception {
+        game.leftWin();
+        game.leftWin();
+        assertThat(game.score(), is("thirty love"));
+    }
+
 }

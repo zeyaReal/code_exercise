@@ -13,6 +13,8 @@ public class TennisGame {
             return "love fifteen";
         if (rightScore == 2)
             return "love thirty";
+        if (rightScore == 3)
+            return "love forty";
 
         if (leftScore == 0)
             return "love all";

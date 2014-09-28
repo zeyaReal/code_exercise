@@ -13,7 +13,7 @@ public class TennisGame {
         if (leftScore == rightScore && leftScore == 0)
             return "love all";
 
-            return SCORE[this.leftScore]+" "+SCORE[this.rightScore];
+        return SCORE[this.leftScore] + " " + SCORE[this.rightScore];
     }
 
     public void leftWin() {

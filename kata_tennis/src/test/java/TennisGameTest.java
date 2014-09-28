@@ -41,27 +41,33 @@ public class TennisGameTest {
 
     @Test
     public void test_shouuld_be_love_fifteen_when_game_score_0_1() throws Exception {
-        game.rightWin();
+        setRightScore();
         assertThat(game.score(), is("love fifteen"));
     }
 
     @Test
     public void test_shouuld_be_love_thirty_when_game_score_0_2() throws Exception {
-        game.rightWin();
-        game.rightWin();
+        setRightScore();
+        setRightScore();
         assertThat(game.score(), is("love thirty"));
     }
 
     @Test
     public void test_shouuld_be_love_forty_when_game_score_0_3() throws Exception {
-        game.rightWin();
-        game.rightWin();
-        game.rightWin();
+        setRightScore();
+        setRightScore();
+        setRightScore();
         assertThat(game.score(), is("love forty"));
     }
 
+    private void setRightScore() {
+        for (int i = 0; i < count; i++) {
+            game.rightWin();
+        }
+    }
+
     private void setLeftScore(int count) {
-        for (int i = 0; i <count ; i++) {
+        for (int i = 0; i < count; i++) {
             game.leftWin();
         }
     }

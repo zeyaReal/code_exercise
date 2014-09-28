@@ -8,9 +8,10 @@ public class TennisGame {
     private int leftScore = 0;
 
     public String score() {
-        if (leftScore != 0)
-            return SCORE[this.leftScore] + " love";
-        return "love all";
+        if (leftScore == 0)
+            return "love all";
+
+        return SCORE[this.leftScore] + " love";
     }
 
     public void leftWin() {

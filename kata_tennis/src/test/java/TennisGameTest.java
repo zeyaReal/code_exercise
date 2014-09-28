@@ -57,6 +57,20 @@ public class TennisGameTest {
         assertThat(game.score(), is("love forty"));
     }
 
+    @Test
+    public void test_shouuld_be_fifteen_all_when_game_score_1_1() throws Exception {
+        setLeftScore(1);
+        setRightScore(1);
+        assertThat(game.score(), is("fifteen all"));
+    }
+
+    @Test
+    public void test_shouuld_be_thirty_all_when_game_score_2_2() throws Exception {
+        setLeftScore(2);
+        setRightScore(2);
+        assertThat(game.score(), is("thirty all"));
+    }
+
     private void setRightScore(int count) {
         for (int i = 0; i < count; i++) {
             game.rightWin();

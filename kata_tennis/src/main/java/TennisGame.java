@@ -6,11 +6,11 @@ public class TennisGame {
 
     public String score() {
         if (leftScore == 1)
-            return "fifteen love";
+            return "fifteen"+" love";
         if (leftScore == 2)
-            return "thirty love";
+            return "thirty"+" love";
         if (leftScore == 3)
-            return "forty love";
+            return "forty"+" love";
         return "love all";
     }
 

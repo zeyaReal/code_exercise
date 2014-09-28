@@ -9,6 +9,8 @@ public class TennisGame {
             return "fifteen love";
         if (leftScore == 2)
             return "thirty love";
+        if (leftScore == 3)
+            return "forty love";
         return "love all";
     }
 

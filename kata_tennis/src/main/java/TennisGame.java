@@ -2,15 +2,17 @@
  * Created by zeya on 14-9-28.
  */
 public class TennisGame {
+
     private int leftScore = 0;
 
     public String score() {
+        String[] score = new String[]{"", "fifteen", "thirty", "forty"};
         if (leftScore == 1)
-            return "fifteen"+" love";
+            return score[1] + " love";
         if (leftScore == 2)
-            return "thirty"+" love";
+            return score[2] + " love";
         if (leftScore == 3)
-            return "forty"+" love";
+            return score[3] + " love";
         return "love all";
     }
 

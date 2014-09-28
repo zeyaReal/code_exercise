@@ -23,23 +23,26 @@ public class TennisGameTest {
 
     @Test
     public void test_shouuld_be_fifteen_lovel_when_game_score_1_0() throws Exception {
-        game.leftWin();
+        setLeftScore(1);
         assertThat(game.score(), is("fifteen love"));
     }
 
     @Test
     public void test_shouuld_be_thirty_lovel_when_game_score_2_0() throws Exception {
-        game.leftWin();
-        game.leftWin();
+        setLeftScore(2);
         assertThat(game.score(), is("thirty love"));
     }
 
     @Test
     public void test_shouuld_be_forty_lovel_when_game_score_3_0() throws Exception {
-        game.leftWin();
-        game.leftWin();
-        game.leftWin();
+        setLeftScore(3);
         assertThat(game.score(), is("forty love"));
+    }
+
+    private void setLeftScore(int count) {
+        for (int i = 0; i <count ; i++) {
+            game.leftWin();
+        }
     }
 
 }

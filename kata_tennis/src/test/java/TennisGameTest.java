@@ -18,57 +18,57 @@ public class TennisGameTest {
 
     @Test
     public void test_shouuld_be_lovel_all_when_game_begin() throws Exception {
-        assertThat(game.score(), is("love all"));
+        assertLeftRightScore(0, 0, "love all");
     }
 
     @Test
     public void test_shouuld_be_fifteen_lovel_when_game_score_1_0() throws Exception {
-        setLeftScore(1);
-        assertThat(game.score(), is("fifteen love"));
+        assertLeftRightScore(1, 0, "fifteen love");
     }
 
     @Test
     public void test_shouuld_be_thirty_lovel_when_game_score_2_0() throws Exception {
-        setLeftScore(2);
-        assertThat(game.score(), is("thirty love"));
+        assertLeftRightScore(2, 0, "thirty love");
     }
 
     @Test
     public void test_shouuld_be_forty_lovel_when_game_score_3_0() throws Exception {
-        setLeftScore(3);
-        assertThat(game.score(), is("forty love"));
+        assertLeftRightScore(3, 0, "forty love");
     }
 
     @Test
     public void test_shouuld_be_love_fifteen_when_game_score_0_1() throws Exception {
-        setRightScore(1);
-        assertThat(game.score(), is("love fifteen"));
+        assertLeftRightScore(0, 1, "love fifteen");
     }
 
     @Test
     public void test_shouuld_be_love_thirty_when_game_score_0_2() throws Exception {
-        setRightScore(2);
-        assertThat(game.score(), is("love thirty"));
+        assertLeftRightScore(0, 2, "love thirty");
     }
 
     @Test
     public void test_shouuld_be_love_forty_when_game_score_0_3() throws Exception {
-        setRightScore(3);
-        assertThat(game.score(), is("love forty"));
+        assertLeftRightScore(0, 3, "love forty");
     }
 
     @Test
     public void test_shouuld_be_fifteen_all_when_game_score_1_1() throws Exception {
-        setLeftScore(1);
-        setRightScore(1);
-        assertThat(game.score(), is("fifteen all"));
+        assertLeftRightScore(1, 1, "fifteen all");
     }
 
     @Test
     public void test_shouuld_be_thirty_all_when_game_score_2_2() throws Exception {
-        setLeftScore(2);
-        setRightScore(2);
-        assertThat(game.score(), is("thirty all"));
+        assertLeftRightScore(2, 2, "thirty all");
+    }
+
+    private void assertLeftRightScore(int leftScore, int rightScore, String score) {
+        setScore(leftScore, rightScore);
+        assertThat(game.score(), is(score));
+    }
+
+    private void setScore(int leftCount, int rightCount) {
+        setLeftScore(leftCount);
+        setRightScore(rightCount);
     }
 
     private void setRightScore(int count) {

@@ -11,14 +11,14 @@ public class TennisGame {
     private String rightPayer;
 
     public TennisGame(String leftPlayer, String rightPayer) {
-
+chong
         this.leftPlayer = leftPlayer;
         this.rightPayer = rightPayer;
     }
 
     public String score() {
 
-        if (leftScore - rightScore > 1 && rightScore > 1 || rightScore - leftScore > 1 && leftScore > 1) {
+        if (isWinnerExist()) {
             return getHigherScorePayer()+" win";
         }
 
@@ -34,6 +34,10 @@ public class TennisGame {
 
         }
         return SCORE[this.leftScore] + " " + SCORE[this.rightScore];
+    }
+
+    private boolean isWinnerExist() {
+        return leftScore - rightScore > 1 && rightScore > 1 || rightScore - leftScore > 1 && leftScore > 1;
     }
 
     private boolean isAdvantageExist() {

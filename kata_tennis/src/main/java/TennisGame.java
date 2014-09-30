@@ -37,7 +37,7 @@ public class TennisGame {
     }
 
     private boolean isWinnerExist() {
-        return leftScore - rightScore > 1 && rightScore > 1 || rightScore - leftScore > 1 && leftScore > 1;
+        return leftScore - rightScore > 1 && leftScore > 3 || rightScore - leftScore > 1 && rightScore > 3;
     }
 
     private boolean isAdvantageExist() {

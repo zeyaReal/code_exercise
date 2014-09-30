@@ -38,7 +38,7 @@ public class TennisGame {
     }
 
     private boolean isAdvantageExist() {
-        return leftScore > rightScore && rightScore >= 3 || rightScore > leftScore && leftScore >= 3;
+        return leftScore > rightScore && rightScore > 2 || rightScore > leftScore && leftScore > 2;
     }
 
     private String getHigherScorePayer() {

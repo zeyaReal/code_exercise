@@ -21,7 +21,7 @@ public class TennisGame {
 
         if (isAdvantageExist()) return "advantage " + getHigherScorePayer();
 
-        if (isDuece()) return "duece";
+        if (isDuece()) return "deuce";
 
         if (leftScore == rightScore)
             return SCORE[this.leftScore] + " " + "all";

@@ -63,7 +63,7 @@ public class TennisGameTest {
 
     @Test
     public void test_should_be_duece_when_game_score_3_3() throws Exception {
-        assertLeftRightScore(3, 3, "duece");
+        assertLeftRightScore(3, 3, "deuce");
     }
 
     @Test
@@ -78,12 +78,12 @@ public class TennisGameTest {
 
     @Test
     public void test_should_be_duece_when_game_score_4_4() throws Exception {
-        assertLeftRightScore(4, 4, "duece");
+        assertLeftRightScore(4, 4, "deuce");
     }
 
     @Test
     public void test_should_be_duece_when_game_score_5_5() throws Exception {
-        assertLeftRightScore(5, 5, "duece");
+        assertLeftRightScore(5, 5, "deuce");
     }
 
     @Test

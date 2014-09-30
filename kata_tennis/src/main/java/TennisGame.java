@@ -18,7 +18,7 @@ public class TennisGame {
 
     public String score() {
 
-        if (leftScore - rightScore > 1 && rightScore > 1){
+        if (leftScore - rightScore > 1 && rightScore > 1 || rightScore - leftScore > 1 && leftScore > 1) {
             return getHigherScorePayer()+" win";
         }
 

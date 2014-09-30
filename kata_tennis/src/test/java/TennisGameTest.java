@@ -87,8 +87,13 @@ public class TennisGameTest {
     }
 
     @Test
-    public void test_should_be_Tom__win_when_game_score_4_2() throws Exception {
+    public void test_should_be_Tom_win_when_game_score_4_2() throws Exception {
         assertLeftRightScore(4, 2, "Tom win");
+    }
+
+    @Test
+    public void test_should_be_Jerry_win_when_game_score_2_4() throws Exception {
+        assertLeftRightScore(2, 4, "Jerry win");
     }
 
     private void assertLeftRightScore(int leftScore, int rightScore, String score) {

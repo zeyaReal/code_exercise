@@ -18,12 +18,12 @@ public class TennisGame {
 
     public String score() {
 
-        if (leftScore > rightScore && rightScore >= 3) {
-            return "advantage " + leftPlayer;
+        if (leftScore - rightScore > 1 && rightScore > 1){
+            return getHigherScorePayer()+" win";
         }
 
-        if (rightScore > leftScore && leftScore >= 3) {
-            return "advantage " + rightPayer;
+        if (isAdvantageExist()) {
+            return "advantage " + getHigherScorePayer();
         }
 
         if (leftScore == rightScore) {
@@ -34,6 +34,14 @@ public class TennisGame {
 
         }
         return SCORE[this.leftScore] + " " + SCORE[this.rightScore];
+    }
+
+    private boolean isAdvantageExist() {
+        return leftScore > rightScore && rightScore >= 3 || rightScore > leftScore && leftScore >= 3;
+    }
+
+    private String getHigherScorePayer() {
+        return leftScore > rightScore ? leftPlayer : rightPayer;
     }
 
     public void leftWin() {

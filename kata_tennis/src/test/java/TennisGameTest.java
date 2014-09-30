@@ -86,6 +86,11 @@ public class TennisGameTest {
         assertLeftRightScore(5, 5, "duece");
     }
 
+    @Test
+    public void test_should_be_Tom__win_when_game_score_4_2() throws Exception {
+        assertLeftRightScore(4, 2, "Tom win");
+    }
+
     private void assertLeftRightScore(int leftScore, int rightScore, String score) {
         setScore(leftScore, rightScore);
         assertThat(game.score(), is(score));

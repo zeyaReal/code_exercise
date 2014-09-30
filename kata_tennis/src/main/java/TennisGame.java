@@ -17,14 +17,17 @@ public class TennisGame {
 
     public String score() {
 
-        if (isWinnerExist()) return getHigherScorePayer() + " win";
+        if (isWinnerExist())
+            return getHigherScorePayer() + " win";
 
-        if (isAdvantageExist()) return "advantage " + getHigherScorePayer();
+        if (isAdvantageExist())
+            return "advantage " + getHigherScorePayer();
 
-        if (isDuece()) return "deuce";
+        if (isDuece())
+            return "deuce";
 
         if (leftScore == rightScore)
-            return SCORE[this.leftScore] + " " + "all";
+            return SCORE[this.leftScore] + " all";
 
         return SCORE[this.leftScore] + " " + SCORE[this.rightScore];
     }

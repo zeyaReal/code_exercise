@@ -11,7 +11,11 @@ public class TennisGame {
     public String score() {
 
         if (leftScore == rightScore){
-           return SCORE[this.leftScore] + " "+"all";
+            if (leftScore < 3) {
+                return SCORE[this.leftScore] + " " + "all";
+            }
+            return "duece";
+
         }
         return SCORE[this.leftScore] + " " + SCORE[this.rightScore];
     }

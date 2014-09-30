@@ -7,8 +7,20 @@ public class TennisGame {
 
     private int leftScore = 0;
     private int rightScore = 0;
+    private String leftPlayer;
+    private String rightPayer;
+
+    public TennisGame(String leftPlayer, String rightPayer) {
+
+        this.leftPlayer = leftPlayer;
+        this.rightPayer = rightPayer;
+    }
 
     public String score() {
+
+        if (leftScore > rightScore && rightScore >= 3){
+            return "advantage Tom";
+        }
 
         if (leftScore == rightScore){
             if (leftScore < 3) {

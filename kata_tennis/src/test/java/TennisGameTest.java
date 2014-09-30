@@ -13,7 +13,7 @@ public class TennisGameTest {
 
     @Before
     public void setUp() {
-        game = new TennisGame();
+        game = new TennisGame("Tom", "Jerry");
     }
 
     @Test
@@ -65,6 +65,12 @@ public class TennisGameTest {
     public void test_shouuld_be_duece_when_game_score_3_3() throws Exception {
         assertLeftRightScore(3, 3, "duece");
     }
+
+    @Test
+    public void test_shouuld_be_advantage_Tom_when_game_score_4_3() throws Exception {
+        assertLeftRightScore(4, 3, "advantage Tom");
+    }
+
 
     @Test
     public void test_shouuld_be_duece_when_game_score_4_4() throws Exception {

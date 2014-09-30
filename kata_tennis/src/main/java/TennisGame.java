@@ -4,6 +4,9 @@
 public class TennisGame {
 
     private static final String[] SCORE = new String[]{"love", "fifteen", "thirty", "forty"};
+    private static final int POINT_LOWER_ADVANTAGE_LIMIT = 2;
+    private static final int POINT_LOWER_WIN_LIMIT = 3;
+    private static final int SCORE_GAP_OF_WIN = 1;
 
     private int leftScore = 0;
     private int rightScore = 0;
@@ -33,15 +36,15 @@ public class TennisGame {
     }
 
     private boolean isDuece() {
-        return leftScore == rightScore && leftScore > 2;
+        return leftScore == rightScore && leftScore > POINT_LOWER_ADVANTAGE_LIMIT;
     }
 
     private boolean isWinnerExist() {
-        return leftScore - rightScore > 1 && leftScore > 3 || rightScore - leftScore > 1 && rightScore > 3;
+        return leftScore - rightScore > SCORE_GAP_OF_WIN && leftScore > POINT_LOWER_WIN_LIMIT || rightScore - leftScore > SCORE_GAP_OF_WIN && rightScore > POINT_LOWER_WIN_LIMIT;
     }
 
     private boolean isAdvantageExist() {
-        return leftScore > rightScore && rightScore > 2 || rightScore > leftScore && leftScore > 2;
+        return leftScore > rightScore && rightScore > POINT_LOWER_ADVANTAGE_LIMIT || rightScore > leftScore && leftScore > POINT_LOWER_ADVANTAGE_LIMIT;
     }
 
     private String getHigherScorePayer() {

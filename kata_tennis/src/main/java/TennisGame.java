@@ -11,7 +11,6 @@ public class TennisGame {
     private String rightPayer;
 
     public TennisGame(String leftPlayer, String rightPayer) {
-chong
         this.leftPlayer = leftPlayer;
         this.rightPayer = rightPayer;
     }

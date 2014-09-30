@@ -18,11 +18,15 @@ public class TennisGame {
 
     public String score() {
 
-        if (leftScore > rightScore && rightScore >= 3){
-            return "advantage Tom";
+        if (leftScore > rightScore && rightScore >= 3) {
+            return "advantage " + leftPlayer;
         }
 
-        if (leftScore == rightScore){
+        if (rightScore > leftScore && leftScore >= 3) {
+            return "advantage " + rightPayer;
+        }
+
+        if (leftScore == rightScore) {
             if (leftScore < 3) {
                 return SCORE[this.leftScore] + " " + "all";
             }

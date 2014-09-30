@@ -71,6 +71,10 @@ public class TennisGameTest {
         assertLeftRightScore(4, 3, "advantage Tom");
     }
 
+    @Test
+    public void test_shouuld_be_advantage_Jerry_when_game_score_3_4() throws Exception {
+        assertLeftRightScore(3, 4, "advantage Jerry");
+    }
 
     @Test
     public void test_shouuld_be_duece_when_game_score_4_4() throws Exception {

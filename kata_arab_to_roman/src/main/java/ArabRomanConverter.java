@@ -4,9 +4,12 @@
 public class ArabRomanConverter {
     public String convert(int number) {
         String result = "";
-        while(number > 0)
-        {
-            result +=  "I";
+        if (number == 5) {
+            return "V";
+        }
+
+        while (number > 0) {
+            result += "I";
             number--;
         }
         return result;

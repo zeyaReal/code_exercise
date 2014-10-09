@@ -18,4 +18,18 @@ public class ArabRomanConverterTest {
         ArabRomanConverter converter = new ArabRomanConverter();
         assertThat(converter.convert(2), is("II"));
     }
+
+    @Test
+    public void test_should_return_III_when_input_3() throws Exception {
+        ArabRomanConverter converter = new ArabRomanConverter();
+        assertThat(converter.convert(3), is("III"));
+    }
+
+    @Test
+    public void test_should_return_V_when_input_5() throws Exception {
+        ArabRomanConverter converter = new ArabRomanConverter();
+        assertThat(converter.convert(5), is("V"));
+    }
+
+
 }

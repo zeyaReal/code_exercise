@@ -3,6 +3,12 @@
  */
 public class ArabRomanConverter {
     public String convert(int number) {
-        return "I";
+        String result = "";
+        while(number > 0)
+        {
+            result +=  "I";
+            number--;
+        }
+        return result;
     }
 }

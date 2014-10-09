@@ -12,4 +12,10 @@ public class ArabRomanConverterTest {
         ArabRomanConverter converter = new ArabRomanConverter();
         assertThat(converter.convert(1), is("I"));
     }
+
+    @Test
+    public void test_should_return_II_when_input_2() throws Exception {
+        ArabRomanConverter converter = new ArabRomanConverter();
+        assertThat(converter.convert(2), is("II"));
+    }
 }

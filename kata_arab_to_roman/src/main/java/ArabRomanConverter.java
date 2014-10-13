@@ -8,6 +8,10 @@ public class ArabRomanConverter {
             return "V";
         }
 
+        if (number == 4){
+            return "IV";
+        }
+
         while (number > 0) {
             result += "I";
             number--;

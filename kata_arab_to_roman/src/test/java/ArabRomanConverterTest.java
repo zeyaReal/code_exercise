@@ -36,5 +36,9 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(5), is("V"));
     }
 
+    @Test
+    public void test_should_return_IV_when_input_4() throws Exception {
+        assertThat(converter.convert(4), is("IV"));
+    }
 
 }

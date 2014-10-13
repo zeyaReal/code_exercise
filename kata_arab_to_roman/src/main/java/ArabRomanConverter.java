@@ -1,21 +1,32 @@
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 /**
  * Created by zeya on 14-10-8.
  */
 public class ArabRomanConverter {
+
+    private SortedMap<Integer,String> arabRomanMap = new TreeMap<>();
+
+    public ArabRomanConverter() {
+        arabRomanMap.put(1, "I");
+        arabRomanMap.put(4, "IV");
+        arabRomanMap.put(5, "V");
+    }
+
     public String convert(int number) {
-        String result = "";
-        if (number == 5) {
-            return "V";
+        if (arabRomanMap.containsKey(number)){
+            return arabRomanMap.get(number);
         }
 
-        if (number == 4){
-            return "IV";
+        if (number > arabRomanMap.lastKey()) {
+            return "V" + convert(number - 5);
         }
 
-        while (number > 0) {
-            result += "I";
-            number--;
+        if (number > 1) {
+            return "I" + convert(number -1);
         }
-        return result;
+
+        return "";
     }
 }

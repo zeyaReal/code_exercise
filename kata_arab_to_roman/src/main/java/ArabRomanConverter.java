@@ -19,6 +19,7 @@ public class ArabRomanConverter {
         arabRomanMap.put(90, "XC");
         arabRomanMap.put(100, "C");
         arabRomanMap.put(400, "CD");
+        arabRomanMap.put(500, "D");
     }
 
     public String convert(int number) {

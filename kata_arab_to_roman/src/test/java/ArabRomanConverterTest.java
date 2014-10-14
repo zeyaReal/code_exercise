@@ -120,6 +120,12 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(400), is("CD"));
     }
 
+    @Test
+    public void test_should_return_D_when_input_500() throws Exception {
+        assertThat(converter.convert(500), is("D"));
+    }
+
+
 
 
 

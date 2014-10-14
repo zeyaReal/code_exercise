@@ -110,6 +110,17 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(100), is("C"));
     }
 
+    @Test
+    public void test_should_return_CCCXCIX_when_input_399() throws Exception {
+        assertThat(converter.convert(399), is("CCCXCIX"));
+    }
+
+    @Test
+    public void test_should_return_CD_when_input_400() throws Exception {
+        assertThat(converter.convert(400), is("CD"));
+    }
+
+
 
 
 

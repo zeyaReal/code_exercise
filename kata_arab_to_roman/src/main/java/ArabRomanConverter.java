@@ -15,18 +15,22 @@ public class ArabRomanConverter {
     }
 
     public String convert(int number) {
-        if (arabRomanMap.containsKey(number)){
-            return arabRomanMap.get(number);
+        return convertFromMap(number, arabRomanMap);
+    }
+
+    private String convertFromMap(int number, SortedMap<Integer, String> currentArabRomanMap) {
+        if (currentArabRomanMap.containsKey(number)){
+            return currentArabRomanMap.get(number);
         }
 
-        if (number > arabRomanMap.lastKey()) {
-            return "V" + convert(number - 5);
+        if (currentArabRomanMap.isEmpty()){
+            return "";
         }
 
-        if (number > 1) {
-            return "I" + convert(number -1);
+        if (number > currentArabRomanMap.lastKey()) {
+            return currentArabRomanMap.get(currentArabRomanMap.lastKey()) + convertFromMap(number - currentArabRomanMap.lastKey(), currentArabRomanMap);
         }
 
-        return "";
+        return convertFromMap(number, currentArabRomanMap.headMap(currentArabRomanMap.lastKey()));
     }
 }

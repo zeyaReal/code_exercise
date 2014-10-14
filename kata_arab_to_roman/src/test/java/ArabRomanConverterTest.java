@@ -95,5 +95,18 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(50), is("L"));
     }
 
+    @Test
+    public void test_should_return_LXXXIX_when_input_89() throws Exception {
+        assertThat(converter.convert(89), is("LXXXIX"));
+    }
+
+
+    @Test
+    public void test_should_return_XC_when_input_90() throws Exception {
+        assertThat(converter.convert(90), is("XC"));
+    }
+
+
+
 
 }

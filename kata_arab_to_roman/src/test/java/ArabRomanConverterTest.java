@@ -50,4 +50,16 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(6), is("VI"));
     }
 
+    @Test
+    public void test_should_return_VIII_when_input_8() throws Exception {
+        assertThat(converter.convert(8), is("VIII"));
+    }
+
+    @Test
+    public void test_should_return_IX_when_input_9() throws Exception {
+        assertThat(converter.convert(9), is("IX"));
+    }
+
+
+
 }

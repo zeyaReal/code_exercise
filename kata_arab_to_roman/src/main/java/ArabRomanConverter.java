@@ -12,6 +12,7 @@ public class ArabRomanConverter {
         arabRomanMap.put(1, "I");
         arabRomanMap.put(4, "IV");
         arabRomanMap.put(5, "V");
+        arabRomanMap.put(9, "IX");
     }
 
     public String convert(int number) {

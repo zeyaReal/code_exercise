@@ -140,4 +140,14 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(1000), is("M"));
     }
 
+    @Test
+    public void test_should_return_MMMCMXCIX_when_input_3999() throws Exception {
+        assertThat(converter.convert(3999), is("MMMCMXCIX"));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void test_should_raise_exception_when_input_beyond_4000() throws Exception {
+        converter.convert(4000);
+    }
+
 }

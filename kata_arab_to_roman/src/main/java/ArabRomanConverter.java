@@ -6,7 +6,9 @@ import java.util.TreeMap;
  */
 public class ArabRomanConverter {
 
-    private SortedMap<Integer,String> arabRomanMap = new TreeMap<>();
+    public static final int MAX_ROMAN_NUMBER = 3999;
+
+    private SortedMap<Integer, String> arabRomanMap = new TreeMap<>();
 
     public ArabRomanConverter() {
         arabRomanMap.put(1, "I");
@@ -25,15 +27,18 @@ public class ArabRomanConverter {
     }
 
     public String convert(int number) {
+        if (number > MAX_ROMAN_NUMBER) {
+            throw new UnsupportedOperationException("too big input! max roman number is 3999. input=" + number);
+        }
         return convertFromMap(number, arabRomanMap);
     }
 
     private String convertFromMap(int number, SortedMap<Integer, String> currentArabRomanMap) {
-        if (currentArabRomanMap.containsKey(number)){
+        if (currentArabRomanMap.containsKey(number)) {
             return currentArabRomanMap.get(number);
         }
 
-        if (currentArabRomanMap.isEmpty()){
+        if (currentArabRomanMap.isEmpty()) {
             return "";
         }
 

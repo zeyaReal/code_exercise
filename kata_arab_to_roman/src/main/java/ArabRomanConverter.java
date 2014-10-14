@@ -34,17 +34,12 @@ public class ArabRomanConverter {
     }
 
     private String convertFromMap(int number, SortedMap<Integer, String> currentArabRomanMap) {
-        if (currentArabRomanMap.containsKey(number)) {
-            return currentArabRomanMap.get(number);
-        }
+        if (currentArabRomanMap.isEmpty()) return "";
 
-        if (currentArabRomanMap.isEmpty()) {
-            return "";
-        }
+        if (currentArabRomanMap.containsKey(number)) return currentArabRomanMap.get(number);
 
-        if (number > currentArabRomanMap.lastKey()) {
+        if (number > currentArabRomanMap.lastKey())
             return currentArabRomanMap.get(currentArabRomanMap.lastKey()) + convertFromMap(number - currentArabRomanMap.lastKey(), currentArabRomanMap);
-        }
 
         return convertFromMap(number, currentArabRomanMap.headMap(currentArabRomanMap.lastKey()));
     }

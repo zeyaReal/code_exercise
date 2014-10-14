@@ -130,10 +130,14 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(899), is("DCCCXCIX"));
     }
 
-
     @Test
     public void test_should_return_CM_when_input_900() throws Exception {
         assertThat(converter.convert(900), is("CM"));
+    }
+
+    @Test
+    public void test_should_return_M_when_input_1000() throws Exception {
+        assertThat(converter.convert(1000), is("M"));
     }
 
 }

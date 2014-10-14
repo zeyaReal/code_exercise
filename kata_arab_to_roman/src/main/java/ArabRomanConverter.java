@@ -13,6 +13,7 @@ public class ArabRomanConverter {
         arabRomanMap.put(4, "IV");
         arabRomanMap.put(5, "V");
         arabRomanMap.put(9, "IX");
+        arabRomanMap.put(10, "X");
     }
 
     public String convert(int number) {

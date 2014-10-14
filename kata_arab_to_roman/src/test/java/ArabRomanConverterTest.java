@@ -60,6 +60,10 @@ public class ArabRomanConverterTest {
         assertThat(converter.convert(9), is("IX"));
     }
 
+    @Test
+    public void test_should_return_X_when_input_10() throws Exception {
+        assertThat(converter.convert(10), is("X"));
+    }
 
 
 }

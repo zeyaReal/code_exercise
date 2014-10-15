@@ -27,7 +27,7 @@ public class ArabRomanConverterTest {
 
     @Parameterized.Parameters
     public static Collection arabToRomanDatas() {
-        return Arrays.asList( new Object[][]{
+        return Arrays.asList(new Object[][]{
                 {1, "I"},
                 {2, "II"},
                 {3, "III"},

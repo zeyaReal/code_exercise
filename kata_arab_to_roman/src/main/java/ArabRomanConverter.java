@@ -30,17 +30,14 @@ public class ArabRomanConverter {
         if (number > MAX_ROMAN_NUMBER) {
             throw new UnsupportedOperationException("too big input! max roman number is 3999. input=" + number);
         }
-        return convertFromMap(number, arabRomanMap);
+        return innerConvert(number);
     }
 
-    private String convertFromMap(int number, SortedMap<Integer, String> currentArabRomanMap) {
-        if (currentArabRomanMap.isEmpty()) return "";
+    private String innerConvert(int number) {
 
-        if (currentArabRomanMap.containsKey(number)) return currentArabRomanMap.get(number);
+        if (number == 0) return "";
 
-        if (number > currentArabRomanMap.lastKey())
-            return currentArabRomanMap.get(currentArabRomanMap.lastKey()) + convertFromMap(number - currentArabRomanMap.lastKey(), currentArabRomanMap);
-
-        return convertFromMap(number, currentArabRomanMap.headMap(currentArabRomanMap.lastKey()));
+        int largestArbicNumberInMappingSmallThanNumber = arabRomanMap.headMap(number+1).lastKey();
+        return arabRomanMap.get(largestArbicNumberInMappingSmallThanNumber) + innerConvert(number - largestArbicNumberInMappingSmallThanNumber);
     }
 }

@@ -1,9 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -11,9 +12,48 @@ import static org.hamcrest.core.Is.is;
 /**
  * Created by zeya on 14-10-8.
  */
+@RunWith(Parameterized.class)
 public class ArabRomanConverterTest {
 
+    private int arabNumber;
+    private String romanNumber;
+
     private ArabRomanConverter converter;
+
+    public ArabRomanConverterTest(int arabNumber, String romanNumber) {
+        this.arabNumber = arabNumber;
+        this.romanNumber = romanNumber;
+    }
+
+    @Parameterized.Parameters
+    public static Collection arabToRomanDatas() {
+        return Arrays.asList( new Object[][]{
+                {1, "I"},
+                {2, "II"},
+                {3, "III"},
+                {4, "IV"},
+                {5, "V"},
+                {6, "VI"},
+                {8, "VIII"},
+                {9, "IX"},
+                {10, "X"},
+                {18, "XVIII"},
+                {39, "XXXIX"},
+                {40, "XL"},
+                {41, "XLI"},
+                {50, "L"},
+                {89, "LXXXIX"},
+                {90, "XC"},
+                {100, "C"},
+                {399, "CCCXCIX"},
+                {400, "CD"},
+                {500, "D"},
+                {899, "DCCCXCIX"},
+                {900, "CM"},
+                {1000, "M"},
+                {3999, "MMMCMXCIX"}
+        });
+    }
 
     @Before
     public void setUp() {
@@ -21,128 +61,8 @@ public class ArabRomanConverterTest {
     }
 
     @Test
-    public void test_should_return_I_when_input_1() throws Exception {
-        assertThat(converter.convert(1), is("I"));
-    }
-
-    @Test
-    public void test_should_return_II_when_input_2() throws Exception {
-        assertThat(converter.convert(2), is("II"));
-    }
-
-    @Test
-    public void test_should_return_III_when_input_3() throws Exception {
-        assertThat(converter.convert(3), is("III"));
-    }
-
-    @Test
-    public void test_should_return_V_when_input_5() throws Exception {
-        assertThat(converter.convert(5), is("V"));
-    }
-
-    @Test
-    public void test_should_return_IV_when_input_4() throws Exception {
-        assertThat(converter.convert(4), is("IV"));
-    }
-
-    @Test
-    public void test_should_return_VI_when_input_6() throws Exception {
-        assertThat(converter.convert(6), is("VI"));
-    }
-
-    @Test
-    public void test_should_return_VIII_when_input_8() throws Exception {
-        assertThat(converter.convert(8), is("VIII"));
-    }
-
-    @Test
-    public void test_should_return_IX_when_input_9() throws Exception {
-        assertThat(converter.convert(9), is("IX"));
-    }
-
-    @Test
-    public void test_should_return_X_when_input_10() throws Exception {
-        assertThat(converter.convert(10), is("X"));
-    }
-
-    @Test
-    public void test_should_return_XVIII_when_input_18() throws Exception {
-        assertThat(converter.convert(18), is("XVIII"));
-    }
-
-    @Test
-    public void test_should_return_XXXIX_when_input_39() throws Exception {
-        assertThat(converter.convert(39), is("XXXIX"));
-    }
-
-    @Test
-    public void test_should_return_XL_when_input_40() throws Exception {
-        assertThat(converter.convert(40), is("XL"));
-    }
-
-    @Test
-    public void test_should_return_XLI_when_input_41() throws Exception {
-        assertThat(converter.convert(41), is("XLI"));
-    }
-
-    @Test
-    public void test_should_return_XLIV_when_input_44() throws Exception {
-        assertThat(converter.convert(44), is("XLIV"));
-    }
-
-    @Test
-    public void test_should_return_L_when_input_50() throws Exception {
-        assertThat(converter.convert(50), is("L"));
-    }
-
-    @Test
-    public void test_should_return_LXXXIX_when_input_89() throws Exception {
-        assertThat(converter.convert(89), is("LXXXIX"));
-    }
-
-    @Test
-    public void test_should_return_XC_when_input_90() throws Exception {
-        assertThat(converter.convert(90), is("XC"));
-    }
-
-    @Test
-    public void test_should_return_C_when_input_100() throws Exception {
-        assertThat(converter.convert(100), is("C"));
-    }
-
-    @Test
-    public void test_should_return_CCCXCIX_when_input_399() throws Exception {
-        assertThat(converter.convert(399), is("CCCXCIX"));
-    }
-
-    @Test
-    public void test_should_return_CD_when_input_400() throws Exception {
-        assertThat(converter.convert(400), is("CD"));
-    }
-
-    @Test
-    public void test_should_return_D_when_input_500() throws Exception {
-        assertThat(converter.convert(500), is("D"));
-    }
-
-    @Test
-    public void test_should_return_DCCCXCIX_when_input_899() throws Exception {
-        assertThat(converter.convert(899), is("DCCCXCIX"));
-    }
-
-    @Test
-    public void test_should_return_CM_when_input_900() throws Exception {
-        assertThat(converter.convert(900), is("CM"));
-    }
-
-    @Test
-    public void test_should_return_M_when_input_1000() throws Exception {
-        assertThat(converter.convert(1000), is("M"));
-    }
-
-    @Test
-    public void test_should_return_MMMCMXCIX_when_input_3999() throws Exception {
-        assertThat(converter.convert(3999), is("MMMCMXCIX"));
+    public void test_arabNumber_to_romanNumber() throws Exception {
+        assertThat(converter.convert(this.arabNumber), is(this.romanNumber));
     }
 
     @Test(expected = UnsupportedOperationException.class)

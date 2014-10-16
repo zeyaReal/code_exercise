@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -8,7 +9,7 @@ public class ArabRomanConverter {
 
     public static final int MAX_ROMAN_NUMBER = 3999;
 
-    private SortedMap<Integer, String> arabRomanMap = new TreeMap<>();
+    private SortedMap<Integer, String> arabRomanMap = new TreeMap<>(Comparator.<Integer>reverseOrder());
 
     public ArabRomanConverter() {
         arabRomanMap.put(1, "I");
@@ -37,7 +38,7 @@ public class ArabRomanConverter {
 
         if (number == 0) return "";
 
-        int largestArbicNumberInMappingSmallThanNumber = arabRomanMap.headMap(number+1).lastKey();
+        int largestArbicNumberInMappingSmallThanNumber = arabRomanMap.tailMap(number).firstKey();
         return arabRomanMap.get(largestArbicNumberInMappingSmallThanNumber) + innerConvert(number - largestArbicNumberInMappingSmallThanNumber);
     }
 }

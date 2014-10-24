@@ -12,6 +12,10 @@ public class RomanArabConverter {
             return 1;
         }
 
+        if (romanNumber.equals("IV")) {
+            return 4;
+        }
+
         return 1 + convert(romanNumber.substring(1));
     }
 }

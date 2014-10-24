@@ -29,7 +29,8 @@ public class RomanArabConverterTest {
         return Arrays.asList(new Object[][]{
                 {"I",   1},
                 {"II",  2},
-                {"III", 3}
+                {"III", 3},
+                {"IV",  4}
         });
     }
 

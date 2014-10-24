@@ -21,10 +21,22 @@ public class RomanArabConverter {
             return 0;
         }
 
-        if (romanArabMap.containsKey(romanNumber)){
+        if (romanNumber.length() == 1) {
             return romanArabMap.get(romanNumber);
         }
 
-        return 1 + convert(romanNumber.substring(1));
+        int result = 0;
+        for (int i = 0; i < romanNumber.length() - 1; i++) {
+            int currentNumber = romanArabMap.get( romanNumber.substring(i,i+1) );
+            int nextNumber = romanArabMap.get( romanNumber.substring(i+1, i+2) );
+
+            if (nextNumber > currentNumber) {
+                result -= currentNumber;
+            } else {
+                result += currentNumber;
+            }
+        }
+        result += romanArabMap.get( romanNumber.substring(romanNumber.length()-1) );
+        return  result;
     }
 }

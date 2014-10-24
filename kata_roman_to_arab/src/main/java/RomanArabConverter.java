@@ -3,16 +3,15 @@
  */
 public class RomanArabConverter {
     public int convert(String romanNumber) {
-        int result = 0;
-        if (romanNumber.equals("III")){
-           result = 1 + convert(romanNumber.substring(1));
-           return result;
+
+        if (romanNumber.isEmpty()) {
+            return 0;
         }
 
-        if (romanNumber.equals("II")){
-            result = 1 + convert(romanNumber.substring(1));
-            return result;
+        if (romanNumber.equals("I")) {
+            return 1;
         }
-        return 1;
+
+        return 1 + convert(romanNumber.substring(1));
     }
 }

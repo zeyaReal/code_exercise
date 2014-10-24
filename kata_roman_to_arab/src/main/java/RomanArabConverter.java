@@ -16,6 +16,7 @@ public class RomanArabConverter {
         romanArabMap.put('L', 50);
         romanArabMap.put('C', 100);
         romanArabMap.put('D', 500);
+        romanArabMap.put('M', 1000);
     }
 
     public int convert(String romanNumber) {

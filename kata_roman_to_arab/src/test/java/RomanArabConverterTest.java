@@ -49,6 +49,8 @@ public class RomanArabConverterTest {
                 {"D", 500},
                 {"DCCCXCIX", 899},
                 {"CM",900},
+                {"M", 1000},
+                {"MMMCMXCIX", 3999}
         });
     }
 

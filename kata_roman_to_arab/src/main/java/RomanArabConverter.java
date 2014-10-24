@@ -16,6 +16,10 @@ public class RomanArabConverter {
             return 4;
         }
 
+        if (romanNumber.equals("V")) {
+            return 5;
+        }
+
         return 1 + convert(romanNumber.substring(1));
     }
 }

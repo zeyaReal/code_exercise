@@ -13,6 +13,7 @@ public class RomanArabConverter {
         romanArabMap.put('I', 1);
         romanArabMap.put('V', 5);
         romanArabMap.put('X', 10);
+        romanArabMap.put('L', 50);
     }
 
     public int convert(String romanNumber) {

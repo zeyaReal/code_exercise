@@ -43,6 +43,9 @@ public class RomanArabConverterTest {
                 {"L", 50},
                 {"LXXXIX", 89},
                 {"XC", 90},
+                {"C", 100},
+                {"CCCXCIX", 399},
+                {"CD", 400},
         });
     }
 

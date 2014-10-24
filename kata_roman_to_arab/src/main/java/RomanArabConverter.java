@@ -9,8 +9,10 @@ public class RomanArabConverter {
            return result;
         }
 
-        if (romanNumber.equals("II"))
-            return 2;
+        if (romanNumber.equals("II")){
+            result = 1 + convert(romanNumber.substring(1));
+            return result;
+        }
         return 1;
     }
 }

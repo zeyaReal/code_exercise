@@ -7,11 +7,11 @@ import java.util.TreeMap;
  */
 public class RomanArabConverter {
 
-    private Map<String, Integer> romanArabMap = new TreeMap<String, Integer>();
+    private Map<Character, Integer> romanArabMap = new TreeMap<>();
 
     public RomanArabConverter() {
-        romanArabMap.put("I", 1);
-        romanArabMap.put("V", 5);
+        romanArabMap.put('I', 1);
+        romanArabMap.put('V', 5);
     }
 
     public int convert(String romanNumber) {
@@ -20,22 +20,18 @@ public class RomanArabConverter {
             return 0;
         }
 
-        if (romanNumber.length() == 1) {
-            return romanArabMap.get(romanNumber);
-        }
+        int result = romanArabMap.get( romanNumber.charAt(romanNumber.length()-1) );
 
-        int result = 0;
         for (int i = 0; i < romanNumber.length() - 1; i++) {
-            int currentNumber = romanArabMap.get( romanNumber.substring(i,i+1) );
-            int nextNumber = romanArabMap.get( romanNumber.substring(i+1, i+2) );
+            int currentNumber = romanArabMap.get( romanNumber.charAt(i) );
+            int rightNumber = romanArabMap.get( romanNumber.charAt(i+1) );
 
-            if (nextNumber > currentNumber) {
+            if (rightNumber > currentNumber) {
                 result -= currentNumber;
             } else {
                 result += currentNumber;
             }
         }
-        result += romanArabMap.get( romanNumber.substring(romanNumber.length()-1) );
         return  result;
     }
 }

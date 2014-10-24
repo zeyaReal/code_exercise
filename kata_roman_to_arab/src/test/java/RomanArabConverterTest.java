@@ -27,8 +27,9 @@ public class RomanArabConverterTest {
     @Parameterized.Parameters
     public static Collection romanToArabDCatas() {
         return Arrays.asList(new Object[][]{
-                {"I", 1},
-                {"II", 2}
+                {"I",   1},
+                {"II",  2},
+                {"III", 3}
         });
     }
 

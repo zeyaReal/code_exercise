@@ -39,6 +39,10 @@ public class RomanArabConverterTest {
                 {"XVIII",18},
                 {"XXXIX",39},
                 {"XL", 40},
+                {"XLI",41},
+                {"L", 50},
+                {"LXXXIX", 89},
+                {"XC", 90},
         });
     }
 

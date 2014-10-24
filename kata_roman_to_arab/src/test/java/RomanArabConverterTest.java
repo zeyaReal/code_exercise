@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,15 +9,20 @@ import static org.hamcrest.core.Is.is;
  */
 public class RomanArabConverterTest {
 
+    private RomanArabConverter converter;
+
+    @Before
+    public void setUp() {
+        converter = new RomanArabConverter();
+    }
+
     @Test
     public void test_convert_I_to_1() throws Exception {
-        RomanArabConverter converter = new RomanArabConverter();
         assertThat(1, is(converter.convert("I")));
     }
 
     @Test
     public void test_convert_II_to_2() throws Exception {
-        RomanArabConverter convert = new RomanArabConverter();
-        assertThat(2, is(convert.convert("II")));
+        assertThat(2, is(converter.convert("II")));
     }
 }

@@ -13,4 +13,10 @@ public class RomanArabConverterTest {
         RomanArabConverter converter = new RomanArabConverter();
         assertThat(1, is(converter.convert("I")));
     }
+
+    @Test
+    public void test_convert_II_to_2() throws Exception {
+        RomanArabConverter convert = new RomanArabConverter();
+        assertThat(2, is(convert.convert("II")));
+    }
 }

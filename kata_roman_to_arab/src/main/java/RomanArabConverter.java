@@ -11,7 +11,6 @@ public class RomanArabConverter {
 
     public RomanArabConverter() {
         romanArabMap.put("I", 1);
-        romanArabMap.put("IV", 4);
         romanArabMap.put("V", 5);
     }
 

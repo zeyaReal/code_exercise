@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,8 +23,8 @@ public class RomanArabConverter {
         int result = 0;
         int lastRightArabVal = 0;
 
-        for (int i = romanNumber.length() - 1; i >=0 ; i--) {
-            int currentArabVal = romanArabMap.get( romanNumber.charAt(i) );
+        for (int i = romanNumber.length() - 1; i >= 0; i--) {
+            int currentArabVal = romanArabMap.get(romanNumber.charAt(i));
 
             if (currentArabVal < lastRightArabVal) {
                 result -= currentArabVal;
@@ -34,6 +33,6 @@ public class RomanArabConverter {
                 lastRightArabVal = currentArabVal;
             }
         }
-        return  result;
+        return result;
     }
 }

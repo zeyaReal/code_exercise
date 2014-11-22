@@ -15,9 +15,11 @@ public class Game {
     }
 
     public boolean isAlive(int row, int col) {
-        if (row < 0 || col < 0 || row >= getWorldLength() || col >= getWorldWidth())
-            return false;
-        return this.innerWorld[row][col];
+        return !isBeyondWorldEdge(row, col) && this.innerWorld[row][col];
+    }
+
+    private boolean isBeyondWorldEdge(int row, int col) {
+        return row < 0 || col < 0 || row >= getWorldLength() || col >= getWorldWidth();
     }
 
     public void evolve() {
@@ -52,16 +54,17 @@ public class Game {
     }
 
     private int count = 0;
+
     private int calculateNeighbourCount(int row, int col) {
         boolean test;
         count = 0;
         for (int i = row - 1; i < row + 2; i++) {
             for (int j = col - 1; j < col + 2; j++) {
-                    test = isAlive(i, j) && increaseCount();
+                test = isAlive(i, j) && increaseCount();
             }
         }
 
-        test =  isAlive(row, col) && decreaseCount();
+        test = isAlive(row, col) && decreaseCount();
         return count;
     }
 

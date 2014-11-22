@@ -3,16 +3,13 @@
  */
 public class Game {
     public static final int CELL_ALIVE_FLAG = 1;
-    private static final int CELL_DEAD_FLAG = 0;
-    private int[][] world;
-    private boolean[][] boolWorld;
+    private boolean[][] innerWorld;
 
     public Game(int[][] world) {
-        this.world = world;
-        this.boolWorld = new boolean[world.length][world[0].length];
+        this.innerWorld = new boolean[world.length][world[0].length];
         for (int row = 0; row < getWorldLength(); row++) {
-            for (int col =0; col< getWorldWidth(); col++){
-                this.boolWorld[row][col] = (world[row][col] == CELL_ALIVE_FLAG);
+            for (int col = 0; col < getWorldWidth(); col++) {
+                this.innerWorld[row][col] = (world[row][col] == CELL_ALIVE_FLAG);
             }
         }
     }
@@ -20,7 +17,7 @@ public class Game {
     public boolean isAlive(int row, int col) {
         if (row < 0 || col < 0 || row >= getWorldLength() || col >= getWorldWidth())
             return false;
-        return this.boolWorld[row][col];
+        return this.innerWorld[row][col];
     }
 
     public void evolve() {
@@ -29,38 +26,61 @@ public class Game {
         for (int row = 0; row < getWorldLength(); row++) {
             for (int col = 0; col < getWorldWidth(); col++) {
                 int neighbourCount = calculateNeighbourCount(row, col);
-                if (neighbourCount == 3) {
-                    newWorld[row][col] = true;
-                } else if (neighbourCount > 3 || neighbourCount < 2){
-                    newWorld[row][col] = false;
-                } else {
-                    newWorld[row][col] = this.boolWorld[row][col];
-                }
+                newWorld[row][col] = this.innerWorld[row][col];
+                newWorld[row][col] = isSuitNewLifeBorn(neighbourCount) || newWorld[row][col];
+                newWorld[row][col] = !isCauseLifeDead(neighbourCount) && newWorld[row][col];
             }
         }
 
-        this.boolWorld = newWorld;
+        this.innerWorld = newWorld;
     }
 
+    private boolean isCauseLifeDead(int neighbourCount) {
+        return isTooCrowded(neighbourCount) || isTooLonely(neighbourCount);
+    }
+
+    private boolean isTooLonely(int neighbourCount) {
+        return neighbourCount < 2;
+    }
+
+    private boolean isTooCrowded(int neighbourCount) {
+        return neighbourCount > 3;
+    }
+
+    private boolean isSuitNewLifeBorn(int neighbourCount) {
+        return neighbourCount == 3;
+    }
+
+    private int count = 0;
     private int calculateNeighbourCount(int row, int col) {
-        int count = 0;
-        for (int i = row-1; i <row+2 ; i++) {
-            for (int j = col-1; j < col+2; j++) {
-                if (isAlive(i,j)) {
-                    count++;
-                }
+        boolean test;
+        count = 0;
+        for (int i = row - 1; i < row + 2; i++) {
+            for (int j = col - 1; j < col + 2; j++) {
+                    test = isAlive(i, j) && increaseCount();
             }
         }
-        if (isAlive(row,col))
-            count--;
+
+        test =  isAlive(row, col) && decreaseCount();
         return count;
     }
 
+    private boolean increaseCount() {
+        count++;
+        return true;
+    }
+
+    private boolean decreaseCount() {
+        count--;
+        return true;
+    }
+
+
     private int getWorldWidth() {
-        return this.boolWorld[0].length;
+        return this.innerWorld[0].length;
     }
 
     private int getWorldLength() {
-        return this.boolWorld.length;
+        return this.innerWorld.length;
     }
 }

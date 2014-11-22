@@ -2,6 +2,7 @@
  * Created by zeya on 14/11/20.
  */
 public class Game {
+    public static final int CELL_ALIVE_FLAG = 1;
     private int[][] world;
 
     public Game(int[][] world) {
@@ -9,18 +10,18 @@ public class Game {
     }
 
     public boolean isAlive(int row, int col) {
-        if (row < 0 || col < 0 || row >= this.world.length || col >= this.world[0].length)
+        if (row < 0 || col < 0 || row >= getWorldWidth() || col >= getWorldLength())
             return false;
-        return this.world[row][col] == 1;
+        return this.world[row][col] == CELL_ALIVE_FLAG;
     }
 
     public void evolve() {
-        int[][] newWorld = new int[this.world.length][this.world[0].length];
+        int[][] newWorld = new int[getWorldWidth()][getWorldLength()];
 
-        for (int row = 0; row < this.world.length; row++) {
-            for (int col = 0; col < this.world[0].length; col++) {
+        for (int row = 0; row < getWorldWidth(); row++) {
+            for (int col = 0; col < getWorldLength(); col++) {
                 if (getNeighbourCount(row, col) == 3) {
-                    newWorld[row][col] = 1;
+                    newWorld[row][col] = CELL_ALIVE_FLAG;
                 } else {
                     newWorld[row][col] = this.world[row][col];
                 }
@@ -28,6 +29,14 @@ public class Game {
         }
 
         this.world = newWorld;
+    }
+
+    private int getWorldLength() {
+        return this.world[0].length;
+    }
+
+    private int getWorldWidth() {
+        return this.world.length;
     }
 
     private int getNeighbourCount(int row, int col) {

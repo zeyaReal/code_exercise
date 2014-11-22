@@ -43,9 +43,16 @@ public class GameTest {
     }
 
     @Test
-    public void test_cell_2_1_is_alive_after_evolve() throws Exception {
+    public void test_cell_3_1_is_alive_after_evolve_for_3_neighbours() throws Exception {
         game.evolve();
-        assertThat(game.isAlive(2,1), is(true));
+        assertThat(game.isAlive(3,1), is(true));
+    }
+
+    @Test
+    public void test_cell_1_2_is_dead_after_evolve_for_too_crowd() throws Exception {
+        game.evolve();
+        assertThat(game.isAlive(1,2), is(false));
 
     }
+
 }

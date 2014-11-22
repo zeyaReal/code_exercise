@@ -3,6 +3,7 @@
  */
 public class Game {
     public static final int CELL_ALIVE_FLAG = 1;
+    private static final int CELL_DEAD_FLAG = 0;
     private int[][] world;
 
     public Game(int[][] world) {
@@ -22,6 +23,8 @@ public class Game {
             for (int col = 0; col < getWorldLength(); col++) {
                 if (getNeighbourCount(row, col) == 3) {
                     newWorld[row][col] = CELL_ALIVE_FLAG;
+                } else if (getNeighbourCount(row,col) > 3){
+                    newWorld[row][col] = CELL_DEAD_FLAG;
                 } else {
                     newWorld[row][col] = this.world[row][col];
                 }

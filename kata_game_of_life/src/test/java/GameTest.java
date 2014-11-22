@@ -52,7 +52,12 @@ public class GameTest {
     public void test_cell_1_2_is_dead_after_evolve_for_too_crowd() throws Exception {
         game.evolve();
         assertThat(game.isAlive(1,2), is(false));
+    }
 
+    @Test
+    public void test_cell_3_3_is_dead_after_evolve_for_too_lonely() throws Exception {
+        game.evolve();
+        assertThat(game.isAlive(3,3), is(false));
     }
 
 }

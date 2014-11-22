@@ -5,22 +5,29 @@ public class Game {
     public static final int CELL_ALIVE_FLAG = 1;
     private static final int CELL_DEAD_FLAG = 0;
     private int[][] world;
+    private boolean[][] boolWorld;
 
     public Game(int[][] world) {
         this.world = world;
+        boolWorld = new boolean[getWorldLength()][getWorldWidth()];
+        for (int row = 0; row < getWorldLength(); row++) {
+            for (int col =0; col< getWorldWidth(); col++){
+                this.boolWorld[row][col] = (world[row][col] == CELL_ALIVE_FLAG);
+            }
+        }
     }
 
     public boolean isAlive(int row, int col) {
-        if (row < 0 || col < 0 || row >= getWorldWidth() || col >= getWorldLength())
+        if (row < 0 || col < 0 || row >= getWorldLength() || col >= getWorldWidth())
             return false;
         return this.world[row][col] == CELL_ALIVE_FLAG;
     }
 
     public void evolve() {
-        int[][] newWorld = new int[getWorldWidth()][getWorldLength()];
+        int[][] newWorld = new int[getWorldLength()][getWorldWidth()];
 
-        for (int row = 0; row < getWorldWidth(); row++) {
-            for (int col = 0; col < getWorldLength(); col++) {
+        for (int row = 0; row < getWorldLength(); row++) {
+            for (int col = 0; col < getWorldWidth(); col++) {
                 int neighbourCount = calculateNeighbourCount(row, col);
                 if (neighbourCount == 3) {
                     newWorld[row][col] = CELL_ALIVE_FLAG;
@@ -49,11 +56,11 @@ public class Game {
         return count;
     }
 
-    private int getWorldLength() {
+    private int getWorldWidth() {
         return this.world[0].length;
     }
 
-    private int getWorldWidth() {
+    private int getWorldLength() {
         return this.world.length;
     }
 }

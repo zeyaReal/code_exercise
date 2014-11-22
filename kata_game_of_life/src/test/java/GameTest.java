@@ -32,4 +32,20 @@ public class GameTest {
         assertThat(game.isAlive(1, 1), is(true));
     }
 
+    @Test
+    public void test_cell_$1_$2_is_dead() throws Exception {
+        assertThat(game.isAlive(-1,-1), is(false));
+    }
+
+    @Test
+    public void test_cell_4_4_is_dead() throws Exception {
+        assertThat(game.isAlive(4,4),is(false));
+    }
+
+    @Test
+    public void test_cell_2_1_is_alive_after_evolve() throws Exception {
+        game.evolve();
+        assertThat(game.isAlive(2,1), is(true));
+
+    }
 }

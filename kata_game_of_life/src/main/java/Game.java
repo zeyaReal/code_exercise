@@ -9,7 +9,7 @@ public class Game {
 
     public Game(int[][] world) {
         this.world = world;
-        boolWorld = new boolean[getWorldLength()][getWorldWidth()];
+        this.boolWorld = new boolean[world.length][world[0].length];
         for (int row = 0; row < getWorldLength(); row++) {
             for (int col =0; col< getWorldWidth(); col++){
                 this.boolWorld[row][col] = (world[row][col] == CELL_ALIVE_FLAG);
@@ -20,26 +20,26 @@ public class Game {
     public boolean isAlive(int row, int col) {
         if (row < 0 || col < 0 || row >= getWorldLength() || col >= getWorldWidth())
             return false;
-        return this.world[row][col] == CELL_ALIVE_FLAG;
+        return this.boolWorld[row][col];
     }
 
     public void evolve() {
-        int[][] newWorld = new int[getWorldLength()][getWorldWidth()];
+        boolean[][] newWorld = new boolean[getWorldLength()][getWorldWidth()];
 
         for (int row = 0; row < getWorldLength(); row++) {
             for (int col = 0; col < getWorldWidth(); col++) {
                 int neighbourCount = calculateNeighbourCount(row, col);
                 if (neighbourCount == 3) {
-                    newWorld[row][col] = CELL_ALIVE_FLAG;
+                    newWorld[row][col] = true;
                 } else if (neighbourCount > 3 || neighbourCount < 2){
-                    newWorld[row][col] = CELL_DEAD_FLAG;
+                    newWorld[row][col] = false;
                 } else {
-                    newWorld[row][col] = this.world[row][col];
+                    newWorld[row][col] = this.boolWorld[row][col];
                 }
             }
         }
 
-        this.world = newWorld;
+        this.boolWorld = newWorld;
     }
 
     private int calculateNeighbourCount(int row, int col) {
@@ -57,10 +57,10 @@ public class Game {
     }
 
     private int getWorldWidth() {
-        return this.world[0].length;
+        return this.boolWorld[0].length;
     }
 
     private int getWorldLength() {
-        return this.world.length;
+        return this.boolWorld.length;
     }
 }

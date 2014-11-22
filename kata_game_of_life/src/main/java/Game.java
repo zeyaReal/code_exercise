@@ -21,9 +21,10 @@ public class Game {
 
         for (int row = 0; row < getWorldWidth(); row++) {
             for (int col = 0; col < getWorldLength(); col++) {
-                if (getNeighbourCount(row, col) == 3) {
+                int neighbourCount = calculateNeighbourCount(row, col);
+                if (neighbourCount == 3) {
                     newWorld[row][col] = CELL_ALIVE_FLAG;
-                } else if (getNeighbourCount(row,col) > 3 || getNeighbourCount(row,col) < 2){
+                } else if (neighbourCount > 3 || neighbourCount < 2){
                     newWorld[row][col] = CELL_DEAD_FLAG;
                 } else {
                     newWorld[row][col] = this.world[row][col];
@@ -34,7 +35,7 @@ public class Game {
         this.world = newWorld;
     }
 
-    private int getNeighbourCount(int row, int col) {
+    private int calculateNeighbourCount(int row, int col) {
         int count = 0;
         for (int i = row-1; i <row+2 ; i++) {
             for (int j = col-1; j < col+2; j++) {
